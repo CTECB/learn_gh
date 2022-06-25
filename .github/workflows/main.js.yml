@@ -1,0 +1,77 @@
+name: KUC tests within parallel specs using self-hosted runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      kintonePlugin:
+        type: choice
+        description: 'plugin'
+        required: true
+        default: multiTab
+        options:
+          - multiTab
+          - conditional
+      testFilter:
+        type: string
+        description: 'Filter test by test description'
+#  push:
+#    branches:
+#      - SSR-1441_TestScripts
+#  schedule:
+#  - cron:  '0 * * * *'
+
+env:
+  DOMAIN: ${{ secrets.DOMAIN }}
+  LOGIN_NAME: ${{ secrets.LOGIN_NAME }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  SPEC_RETRIES: 2
+
+jobs:
+  validate-inputs:
+    name: Validate parameters
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set job env
+        run: |
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            echo "schedule event"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "KINTONE_PLUGIN=${github.event.inputs.kintonePlugin}" >> $GITHUB_ENV
+            echo "TEST_FILTER=${{ github.event.inputs.testFilter }}" >> $GITHUB_ENV
+          fi
+          echo "SPEC_RETRIES=${{ env.SPEC_RETRIES }}" >> $GITHUB_ENV
+      - name: Print all parameters
+        run: |
+          message="Testing plugin: ${{ env.KINTONE_PLUGIN }} - Test suites: ${{ env.TEST_SUITES }}"
+          echo "::notice title=Test info::$message"
+    outputs:
+      kintonePlugin: ${{ env.KINTONE_PLUGIN }}
+      testFilter: ${{ env.TEST_FILTER }}
+      specRetries: ${{ env.SPEC_RETRIES }}
+
+  test:
+    name: Test
+    needs: [ validate-inputs]
+    if: |
+      !failure() && !cancelled() &&
+      needs.validate-inputs.outputs.isTesting == 'true' &&
+      needs.validate-inputs.outputs.runners != '[]'
+    uses: ./.github/workflows/execute-tests.yml
+    with:
+      specRetries: ${{ needs.validate-inputs.outputs.specRetries }}
+      kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
+      testFilter: ${{ needs.validate-inputs.outputs.testFilter }}
+    secrets:
+      domain: ${{ secrets.DOMAIN }}
+      loginName: ${{ secrets.LOGIN_NAME }}
+      password: ${{ secrets.PASSWORD }}
+
+  report:
+    name: Report
+    needs: [ validate-inputs, test ]
+    if: |
+      !cancelled() &&
+      needs.validate-inputs.result != 'failure' &&
+      needs.prepare.result != 'failure'
+    uses: ./.github/workflows/report.yml
