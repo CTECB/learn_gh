@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Sat Jul 02 20:38:05 GMT 2022","Sat Jul 02 20:38:18 GMT 2022","13507","","Multi-Tab - Display","","Multi-Tab - Display","""before all"" hook for Multi-Tab - Display","""before all"" hook for Multi-Tab - Display",""
-"passed","Sat Jul 02 20:38:18 GMT 2022","Sat Jul 02 20:38:18 GMT 2022","208","","Multi-Tab - Display","","Multi-Tab - Display","Display_001 - Verify multi-tab display correctly if the number of tabs greater than 1","Display_001 - Verify multi-tab display correctly if the number of tabs greater than 1",""
