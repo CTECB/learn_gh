@@ -1,0 +1,58 @@
+name: Kintone plugin test execution
+
+on:
+  workflow_call:
+    inputs:
+      kintonePlugin:
+        required: true
+        type: string
+      testFilter:
+        required: false
+        type: string
+      specRetries:
+        required: true
+        type: string
+    secrets:
+      domain:
+        required: true
+      loginName:
+        required: true
+      password:
+        required: true
+
+env:
+  DOMAIN: ${{ secrets.domain }}
+  LOGIN_NAME: ${{ secrets.loginName }}
+  PASSWORD: ${{ secrets.password }}
+  SPEC_RETRIES: ${{ inputs.specRetries }}
+  KINTONE_PLUGIN: ${{ inputs.kintonePlugin }}
+  TEST_FILTER: ${{ inputs.testFilter }}
+
+jobs:
+  test-execution:
+    name: ${{ inputs.kintonePlugin }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Upgrade chrome and get appropriate chromedriver version
+        run: |
+          google-chrome --version
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
+          chromeVersion=$(google-chrome --product-version)
+          chromedriverVersion=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${chromeVersion%.*})
+          echo "CHROMEDRIVER_VERSION=$chromedriverVersion" >> $GITHUB_ENV
+      - name: Install npm packages
+        run: npm install
+      - name: Execute test for [${{ inputs.kintonePlugin }}]
+        run: npm run test:${{ inputs.kintonePlugin }}
+      - name: Upload allure results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure_results_${{ inputs.kintonePlugin }}
+          path: allure-results
+          if-no-files-found: ignore

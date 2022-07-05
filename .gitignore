@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+.tmp
+.idea
+allure-report/*
+allure-results/*
+tools/test-result-manage/dist
+tmp

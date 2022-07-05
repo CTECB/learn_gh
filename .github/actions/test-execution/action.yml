@@ -1,0 +1,69 @@
+name: test-execution
+description: Execute kintone plugin test
+
+inputs:
+  kintonePlugin:
+    description: plugin name
+    required: true
+  testFilter:
+    description: test filter
+    required: false
+  specRetries:
+    description: spec retries
+    required: true
+  domain:
+    description: domain
+    required: true
+  loginName:
+    description: login name
+    required: true
+  password:
+    description: password
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: echo "$GITHUB_CONTEXT"
+      shell: bash
+    - name: Test it
+      run: echo "This is test"
+      shell: bash
+#    - name: Upgrade chrome and get appropriate chromedriver version
+#      run: |
+#        sudo apt-get update
+#        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#        sudo dpkg -i google-chrome-stable_current_amd64.deb
+#        chromeVersion=$(google-chrome --product-version)
+#        chromedriverVersion=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${chromeVersion%.*})
+#        echo "CHROMEDRIVER_VERSION=$chromedriverVersion" >> $GITHUB_ENV
+#      shell: bash
+    - name: Start selenium docker
+      run: docker-compose -f tools/docker/docker-compose.yml up -d
+      shell: bash
+    - name: Install npm packages
+      run: npm install
+      shell: bash
+    - name: Execute test for [${{ inputs.kintonePlugin }}]
+      run: npm run test:${{ inputs.kintonePlugin }}
+      shell: bash
+      env:
+        DOMAIN: ${{ inputs.domain }}
+        LOGIN_NAME: ${{ inputs.loginName }}
+        PASSWORD: ${{ inputs.password }}
+        SPEC_RETRIES: ${{ inputs.specRetries }}
+        KINTONE_PLUGIN: ${{ inputs.kintonePlugin }}
+        TEST_FILTER: ${{ inputs.testFilter }}
+    - name: Upload allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure_results_${{ inputs.kintonePlugin }}
+        path: allure-results
+        if-no-files-found: ignore

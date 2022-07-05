@@ -1,0 +1,52 @@
+name: kintone-report
+description: Report to Kintone app
+
+inputs:
+  kintonePlugin:
+    description: plugin name
+    required: true
+  githubToken:
+    description: github token
+    required: true
+  testManagementKintoneUrl:
+    description: test management Kintone Url
+    required: true
+  testManagementAppId:
+    description: test management app Id
+    required: true
+  testManagementAppApiToken:
+    description: test management app api token
+    required: true
+  testResult:
+    description: test result
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 16
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: echo "$GITHUB_CONTEXT"
+      shell: bash
+    - name: Install npm packages
+      run: npm install
+      shell: bash
+    - run: |
+        executionTime=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/timing | jq .run_duration_ms)
+        echo "EXECUTION_TIME=$executionTime" >> $GITHUB_ENV
+        npx ts-node tools/ci/kintone-report.ts
+      shell: bash
+      env:
+        GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        WORKFLOW_RUN_NUMBER: ${{ github.run_number }}
+        GITHUB_TOKEN: ${{ inputs.githubToken }}
+        TEST_MANAGEMENT_KINTONE_URL: ${{ inputs.testManagementKintoneUrl }}
+        TEST_MANAGEMENT_APP_ID: ${{ inputs.testManagementAppId }}
+        TEST_MANAGEMENT_APP_API_TOKEN: ${{ inputs.testManagementAppApiToken }}
+        KINTONE_PLUGIN: ${{ inputs.kintonePlugin }}
+        TEST_RESULT: ${{ inputs.testResult }}
+        ALLURE_REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_number }}/

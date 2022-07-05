@@ -1,4 +1,4 @@
-name: KUC tests within parallel specs using self-hosted runner
+name: Kintone plugin tests
 
 on:
   workflow_dispatch:
@@ -14,6 +14,7 @@ on:
       testFilter:
         type: string
         description: 'Filter test by test description'
+        required: false
 #  push:
 #    branches:
 #      - SSR-1441_TestScripts
@@ -32,12 +33,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+        shell: bash
       - name: Set job env
         run: |
           if [[ "${{ github.event_name }}" == "schedule" ]]; then
-            echo "schedule event"
+            while read line; do
+              echo "$line" >> $GITHUB_ENV
+            done < ${{ github.workspace }}/.github/workflows/.env
           elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo "KINTONE_PLUGIN=${github.event.inputs.kintonePlugin}" >> $GITHUB_ENV
+            echo "KINTONE_PLUGIN=${{ github.event.inputs.kintonePlugin }}" >> $GITHUB_ENV
             echo "TEST_FILTER=${{ github.event.inputs.testFilter }}" >> $GITHUB_ENV
           fi
           echo "SPEC_RETRIES=${{ env.SPEC_RETRIES }}" >> $GITHUB_ENV
@@ -51,27 +59,44 @@ jobs:
       specRetries: ${{ env.SPEC_RETRIES }}
 
   test:
-    name: Test
-    needs: [ validate-inputs]
-    if: |
-      !failure() && !cancelled() &&
-      needs.validate-inputs.outputs.isTesting == 'true' &&
-      needs.validate-inputs.outputs.runners != '[]'
-    uses: ./.github/workflows/execute-tests.yml
-    with:
-      specRetries: ${{ needs.validate-inputs.outputs.specRetries }}
-      kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
-      testFilter: ${{ needs.validate-inputs.outputs.testFilter }}
-    secrets:
-      domain: ${{ secrets.DOMAIN }}
-      loginName: ${{ secrets.LOGIN_NAME }}
-      password: ${{ secrets.PASSWORD }}
+    runs-on: ubuntu-latest
+    needs: [ validate-inputs ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/test-execution
+        with:
+          specRetries: ${{ needs.validate-inputs.outputs.specRetries }}
+          kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
+          domain: ${{ secrets.DOMAIN }}
+          loginName: ${{ secrets.loginName }}
+          password: ${{ secrets.password }}
 
-  report:
-    name: Report
+  allure-report:
+    runs-on: ubuntu-latest
     needs: [ validate-inputs, test ]
     if: |
       !cancelled() &&
-      needs.validate-inputs.result != 'failure' &&
-      needs.prepare.result != 'failure'
-    uses: ./.github/workflows/report.yml
+      needs.validate-inputs.result != 'failure'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/allure-report
+        with:
+          kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+  kintone-report:
+    runs-on: ubuntu-latest
+    needs: [ validate-inputs, test ]
+    if: |
+      !cancelled() &&
+      needs.validate-inputs.result != 'failure'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/kintone-report
+        with:
+          kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          testManagementKintoneUrl: ${{ secrets.TEST_MANAGEMENT_KINTONE_URL }}
+          testManagementAppId: ${{ secrets.TEST_MANAGEMENT_APP_ID }}
+          testManagementAppApiToken: ${{ secrets.TEST_MANAGEMENT_APP_API_TOKEN }}
+          testResult: ${{ needs.test.result }}

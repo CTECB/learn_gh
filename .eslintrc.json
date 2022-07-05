@@ -1,0 +1,18 @@
+{
+  "env": {
+    "node": true
+  },
+  "plugins": ["wdio"],
+  "extends": [
+    "@cybozu/eslint-config/presets/typescript",
+    "plugin:wdio/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 1,
+    "no-invalid-this": "off",
+    "max-statements": ["off"],
+    "brace-style": "off",
+    "object-curly-spacing": ["error", "always"],
+    "wdio/no-pause": "off"
+  }
+}
