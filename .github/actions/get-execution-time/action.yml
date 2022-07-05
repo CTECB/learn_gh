@@ -1,0 +1,12 @@
+name: 'get-execution-time'
+description: 'Get test execution time'
+inputs:
+  startTime:
+    description: 'Start time'
+    required: true
+outputs:
+  executionTime: # id of output
+    description: 'Execution time'
+runs:
+  using: 'node16'
+  main: 'index.js'

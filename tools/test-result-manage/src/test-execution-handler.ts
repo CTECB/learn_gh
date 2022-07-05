@@ -6,7 +6,7 @@ import { updateTestManagementRecord } from './test-result-handler';
 
 kintone.events.on(['app.record.detail.show'], async (event: any) => {
   const octokit = new Octokit({
-    auth: process.env.PAT || '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'
+    auth: process.env.PAT || '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'
   });
   await handleTestExecution(octokit, event);
 });
@@ -24,14 +24,20 @@ const handleTestExecution = async (octokit: Octokit, event: any) => {
     try {
       const selectedPlugin = event.record.ddlPluginName.value;
       await triggerPluginTestWorkflow(octokit, selectedPlugin);
-      const info = new Notification({ text: 'Github Workflow has been triggered for testing. Please reload page after a couple minutes', type: 'info' });
-      info.open();
       await updateTestManagementRecord(TEST_MANAGEMENT_APP.appId, { status: 'running' });
       btnRunTest.disabled = true;
-      location.reload();
+      setTimeout(()=> {
+        location.reload();
+      }, 4000);
+      const info = new Notification({
+        text: 'Github Workflow has been triggered for testing. Please reload page after a couple minutes', type: 'info'
+      });
+      info.open();
     } catch (e) {
-      // @ts-ignore
-      const errorMsg = new Notification({ text: `An error occurred while triggering workflow job!\n[${e.message}]`, type: 'danger' });
+      const errorMsg = new Notification({
+        // @ts-ignore
+        text: `An error occurred while triggering workflow job!\n[${e.message}]`, type: 'danger'
+      });
       errorMsg.open();
     }
     spinner.close();

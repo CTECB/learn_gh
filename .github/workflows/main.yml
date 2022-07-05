@@ -17,7 +17,7 @@ on:
         required: false
 #  push:
 #    branches:
-#      - SSR-1441_TestScripts
+#      - ABC
 #  schedule:
 #  - cron:  '0 * * * *'
 
@@ -38,6 +38,10 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
         shell: bash
+      - name: Get start time
+        run: |
+          currentTime=$(date +'%c')
+          echo "START_TIME=$currentTime" >> $GITHUB_ENV
       - name: Set job env
         run: |
           if [[ "${{ github.event_name }}" == "schedule" ]]; then
@@ -57,6 +61,7 @@ jobs:
       kintonePlugin: ${{ env.KINTONE_PLUGIN }}
       testFilter: ${{ env.TEST_FILTER }}
       specRetries: ${{ env.SPEC_RETRIES }}
+      startTime: ${{ env.START_TIME }}
 
   test:
     runs-on: ubuntu-latest
@@ -100,3 +105,4 @@ jobs:
           testManagementAppId: ${{ secrets.TEST_MANAGEMENT_APP_ID }}
           testManagementAppApiToken: ${{ secrets.TEST_MANAGEMENT_APP_API_TOKEN }}
           testResult: ${{ needs.test.result }}
+          startTime: ${{ needs.validate-inputs.outputs.startTime }}
