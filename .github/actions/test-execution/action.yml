@@ -45,7 +45,7 @@ runs:
 #        echo "CHROMEDRIVER_VERSION=$chromedriverVersion" >> $GITHUB_ENV
 #      shell: bash
     - name: Start selenium docker
-      run: docker-compose -f tools/docker/docker-compose.yml up -d
+      run: docker compose -f tools/docker/docker-compose.yml up -d
       shell: bash
     - name: Install npm packages
       run: npm install
