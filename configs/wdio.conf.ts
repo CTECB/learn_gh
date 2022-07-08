@@ -29,7 +29,7 @@ export const config: WebdriverIO.Config = {
 
   logLevel: 'info',
   bail: 0,
-  baseUrl: process.env.DOMAIN || 'haula.kintone.com',
+  baseUrl: 'haula.kintone.com',
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,

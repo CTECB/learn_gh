@@ -1,8 +1,8 @@
-export const testingSiteDomain = process.env.DOMAIN || 'haula.kintone.com';
+export const testingSiteDomain = 'haula.kintone.com';
 
 export const credentials = {
-  username: process.env.LOGIN_NAME || 'hau-la@cybozu.vn',
-  password: process.env.PASSWORD || 'haula2907',
+  username: 'hau-la@cybozu.vn',
+  password: 'haula2907',
 };
 
 export const testingApps = {
