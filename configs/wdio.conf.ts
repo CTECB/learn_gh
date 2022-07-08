@@ -1,5 +1,6 @@
 import { desktopSuites } from '@configs/desktop-suites';
 import { getTestSpecs } from '@configs/getTestSpecs';
+import { testingSiteDomain } from "@configs/test-conf";
 
 const GRID = process.env.GRID || 'localhost:4444';
 const GRID_PATHS = GRID.split(':');
@@ -29,7 +30,7 @@ export const config: WebdriverIO.Config = {
 
   logLevel: 'info',
   bail: 0,
-  baseUrl: 'haula.kintone.com',
+  baseUrl: testingSiteDomain,
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
@@ -55,7 +56,8 @@ export const config: WebdriverIO.Config = {
   //     //   args: { drivers } // drivers to use
   //     // }
   //   ],
-  //   'image-comparison'],
+  //   // 'image-comparison'
+  // ],
   framework: 'mocha',
   reporters: [
     [

@@ -2,8 +2,8 @@ import { FIELD_CODES, TEST_MANAGEMENT_APP } from './config';
 import { KintoneRestAPIClient, KintoneRestAPIError } from '@kintone/rest-api-client';
 
 const kintoneRestApiClient = new KintoneRestAPIClient({
-  baseUrl: TEST_MANAGEMENT_APP.kintoneURL || 'https://haula.kintone.com',
-  auth: { apiToken: TEST_MANAGEMENT_APP.apiToken || 'G3lCTEhs8nFo8i7X0JYZ4K4l7Ndarhqd8xO5xvxc' },
+  baseUrl: TEST_MANAGEMENT_APP.kintoneURL || 'https://sdd-demo.cybozu.com',
+  auth: { apiToken: TEST_MANAGEMENT_APP.apiToken || 'yqBptSVGRYfoCGPyT4q6vzKVToI7Y7aR9MeeTx0y' },
 });
 
 export const updateTestManagementRecord = async (appId: string, data: any, action: string = '') => {

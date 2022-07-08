@@ -48,7 +48,7 @@ describe('Multi-Tab - Display', () => {
     await RecordViewPage.verifyHTLMContent('RecordViewDisplay_001_Tab1.html');
   });
 
-  it.only('Display_002 - Verify default tab can be changed and display correctly', async () => {
+  it('Display_002 - Verify default tab can be changed and display correctly', async () => {
     // Setting default tab again in setting plugin screen
     await SystemPluginSettingPage.open(appSettingUrl);
     await SystemPluginSettingPage.clickPluginSettingIcon();
@@ -67,7 +67,7 @@ describe('Multi-Tab - Display', () => {
     console.log('test 3');
   });
 
-  it.only('Display_004 - Verify multi-tab display correctly if there is multiple sections of multi-tab', async () => {
+  it('Display_004 - Verify multi-tab display correctly if there is multiple sections of multi-tab', async () => {
     // Setting:
     // - Add new 1 tab section
     // - Default tab & Remember last selected tab
@@ -93,7 +93,7 @@ describe('Multi-Tab - Display', () => {
     // Verify last selected tab of 2 sections
   });
 
-  it.only('Display_005 - Verify multi-tab display correctly if there is only 1 tab', async () => {
+  it('Display_005 - Verify multi-tab display correctly if there is only 1 tab', async () => {
     await SystemPluginSettingPage.open(appSettingUrl);
     await RecordAddPage.login(credentials);
     await SystemPluginSettingPage.clickPluginSettingIcon();

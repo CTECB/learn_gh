@@ -9,8 +9,8 @@ export const FIELD_CODES = {
 };
 
 export const TEST_MANAGEMENT_APP = {
-  kintoneURL: process.env.TEST_MANAGEMENT_KINTONE_URL || 'https://haula.kintone.com',
-  appId: process.env.TEST_MANAGEMENT_APP_ID || '101',
-  apiToken: process.env.TEST_MANAGEMENT_APP_API_TOKEN || 'G3lCTEhs8nFo8i7X0JYZ4K4l7Ndarhqd8xO5xvxc',
+  kintoneURL: process.env.TEST_MANAGEMENT_KINTONE_URL || 'https://sdd-demo.cybozu.com',
+  appId: process.env.TEST_MANAGEMENT_APP_ID || '1282',
+  apiToken: process.env.TEST_MANAGEMENT_APP_API_TOKEN || 'yqBptSVGRYfoCGPyT4q6vzKVToI7Y7aR9MeeTx0y',
   pluginName: process.env.KINTONE_PLUGIN || 'multiTab'
 };

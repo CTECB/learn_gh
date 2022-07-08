@@ -1,19 +1,19 @@
 import { Button, Notification, Spinner, Dropdown } from 'kintone-ui-component';
-import { FIELD_CODES, TEST_MANAGEMENT_APP } from './config';
+import { TEST_MANAGEMENT_APP } from './config';
 import { triggerPluginTestWorkflow } from './github-handler';
 import { Octokit } from '@octokit/core';
 import { updateTestManagementRecord } from './test-result-handler';
 
 kintone.events.on(['app.record.index.show'], async (event: any) => {
   const octokit = new Octokit({
-    auth: process.env.PAT || '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'
+    auth: process.env.PAT || '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'
   });
   await handleIndexTestExecution(octokit, event);
 });
 
 kintone.events.on(['app.record.detail.show'], async (event: any) => {
   const octokit = new Octokit({
-    auth: process.env.PAT || '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'
+    auth: process.env.PAT || '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'
   });
   await handleTestExecution(octokit, event);
 });
