@@ -6,7 +6,7 @@ import { updateTestManagementRecord } from './test-result-handler';
 
 kintone.events.on(['app.record.detail.show'], async (event: any) => {
   const octokit = new Octokit({
-    auth: process.env.PAT || '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'
+    auth: process.env.PAT || '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'
   });
   await handleTestExecution(octokit, event);
 });

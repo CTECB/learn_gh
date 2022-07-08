@@ -29,7 +29,7 @@ export const config: WebdriverIO.Config = {
 
   logLevel: 'info',
   bail: 0,
-  baseUrl: 'https://haula.kintone.com',
+  baseUrl: process.env.DOMAIN || 'haula.kintone.com',
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
@@ -45,17 +45,17 @@ export const config: WebdriverIO.Config = {
     },
     acceptInsecureCerts: true
   }],
-  services: [
-    // ['selenium-standalone',
-    //   {
-    //     skipSeleniumInstall: false,
-    //   },
-    //   // {
-    //   //   installArgs: { drivers },
-    //   //   args: { drivers } // drivers to use
-    //   // }
-    // ],
-    'image-comparison'],
+  // services: [
+  //   ['selenium-standalone',
+  //     {
+  //       skipSeleniumInstall: false,
+  //     },
+  //     // {
+  //     //   installArgs: { drivers },
+  //     //   args: { drivers } // drivers to use
+  //     // }
+  //   ],
+  //   'image-comparison'],
   framework: 'mocha',
   reporters: [
     [

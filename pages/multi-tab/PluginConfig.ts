@@ -16,6 +16,7 @@ const END_TAB_ITEMS = `${END_TAB_DDL}//div[@class="kuc-list-outer"]//div[contain
 const TAB_SELECTION_TABLE = '//div[@class="table-tab-row"][%d]/div[@class="table-tab-right"]//div[@class="kuc-table-tbody"]';
 const TAB_SELECTION_LIST = `${TAB_SELECTION_TABLE}//div[@class="kuc-table-tr"]`;
 const ENABLE_TAB_CBX = `${TAB_SELECTION_LIST}[%d]//input[@type="checkbox"]`;
+const DEFAULT_TAB_RAD = `${TAB_SELECTION_LIST}[%d]//input[@type="radio"]`;
 const ADD_SECTION_ICN = '.table-tab-add';
 
 const SUBMIT_BTN = '.plugin-layout .button-group__save';
@@ -75,6 +76,12 @@ class PluginConfig extends BasePage {
         await browser.pause(1000);
       }
     }
+  }
+
+  public async setDefaultTabs(section: number, index: number) {
+    const selector = sprintf(DEFAULT_TAB_RAD, section, index);
+    await $(selector).waitForEnabled();
+    await actionUtil.clickElementByJS(selector);
   }
 
   public async clickSubmit() {

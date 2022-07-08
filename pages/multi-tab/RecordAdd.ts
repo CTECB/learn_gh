@@ -27,7 +27,13 @@ class RecordAdd extends BasePage {
     await browser.pause(4000);
   };
 
-  public getRecordBodyHtml = async (regex: RegExp[], isSaveResult = false) => {
+  public verifyIsSelectedTab = async (tabName: string) => {
+    const selector = sprintf(TAB_BTN, tabName);
+    await expect($(selector)).toHaveElementClass('submit');
+  };
+
+  public getRecordBodyHtml = async (regex: RegExp[], isSaveResult = true) => {
+    await pageUtil.waitForPageReady();
     await browser.pause(1000);
     let recordBody = await $(RECORD_BODY).getHTML();
     regex.forEach(value => {
@@ -42,7 +48,7 @@ class RecordAdd extends BasePage {
   };
 
   public verifyHTLMContent = async (expectedContentFileName: string) => {
-    const specificIdRegex = /for="\d+"|id="\d+"|(?<=id=")\S*(?=html5)/g;
+    const specificIdRegex = /for="\d+"|id="\d+"|(?<=id=")\S*(?=html5)|((?<==":)(?:\S+)(?="))/g;
     const generalDynamicStringRegex = /(\S+\d+.\d+.(:((\d+)|(\w+)).\w+)?)/g;
     const specificWidthRegex = /(?<=border-box; width: )\d+/g;
     const specificHeightRegex = /(?<=tabindex="\d" style="height: )\d+/g;

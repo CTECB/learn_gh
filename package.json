@@ -2,7 +2,8 @@
   "name": "kintone-plugin-tests",
   "version": "0.1.0",
   "scripts": {
-    "test:multiTab": "wdio run configs/wdio.conf.ts --suite multiTab"
+    "test:multiTab": "wdio run configs/wdio.conf.ts --suite multiTab",
+    "eslint:check": "node_modules/.bin/eslint test/**/*.ts configs/**/*.ts configs/*.ts utils/**/*.ts utils/*.ts tools/**/*.ts"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -30,7 +31,6 @@
     "sprintf-js": "^1.1.2",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.14.1",
-    "typescript": "^4.6.3",
-    "wdio-image-comparison-service": "^3.1.1"
+    "typescript": "^4.6.3"
   }
 }

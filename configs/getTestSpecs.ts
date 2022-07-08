@@ -4,9 +4,9 @@ export const getTestSpecs = (testSuites) => {
   let testSuitesOjb: any = Object.assign(testSuites);
   if (
     process.env.PLUGIN_SUITES !== undefined &&
-    process.env.PLUGIN_SUITES !== "ALL"
+    process.env.PLUGIN_SUITES !== 'ALL'
   ) {
-    const inputSuites = process.env.PLUGIN_SUITES.split(",");
+    const inputSuites = process.env.PLUGIN_SUITES.split(',');
     testSuitesOjb = _.pick(testSuites, inputSuites);
   }
   const suites = Object.values(testSuitesOjb);
