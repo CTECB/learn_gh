@@ -76,6 +76,9 @@ jobs:
           domain: ${{ secrets.TESTING_SITE_DOMAIN }}
           loginName: ${{ secrets.TESTING_SITE_USERNAME }}
           password: ${{ secrets.TESTING_SITE_PASSWORD }}
+          testManagementKintoneUrl: ${{ secrets.TEST_MANAGEMENT_KINTONE_URL }}
+          testManagementAppId: ${{ secrets.TEST_MANAGEMENT_APP_ID }}
+          testManagementAppApiToken: ${{ secrets.TEST_MANAGEMENT_APP_API_TOKEN }}
 
   allure-report:
     runs-on: ubuntu-latest

@@ -30,7 +30,7 @@ export const updateTestManagementRecord = async (appId: string, data: any, selec
     console.log('new history: ----- ', historyTable);
   }
 
-  let recordData: any = {
+  const recordData: any = {
     tblTestHistory: {
       value: historyTable,
     },

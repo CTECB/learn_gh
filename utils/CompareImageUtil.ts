@@ -1,5 +1,6 @@
 import { join } from 'path';
-import { acceptedMismatchPercent } from '@configs/test-conf';
+// import { acceptedMismatchPercent } from '@configs/test-conf';
+const acceptedMismatchPercent = 0.05;
 
 class CompareImageUtil {
   runType: string;
