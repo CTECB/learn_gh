@@ -35,10 +35,10 @@ describe('MultiTab - Display', () => {
   before('Add plugin', async () => {
     await SystemPluginSettingPage.open(appSettingUrl);
     await SystemPluginSettingPage.login(credentials);
-    // if (await SystemPluginSettingPage.getNumberOfPlugins() > 0) {
-    //   await SystemPluginSettingPage.removePlugin();
-    // }
-    // await SystemPluginSettingPage.addPluginById(plugins.multiTab.id);
+    if (await SystemPluginSettingPage.getNumberOfPlugins() > 0) {
+      await SystemPluginSettingPage.removePlugin();
+    }
+    await SystemPluginSettingPage.addPluginById(plugins.multiTab.id);
   });
 
   it('Display_001 - Verify multi-tab display correctly if the number of tabs greater than 1', async () => {
@@ -90,7 +90,7 @@ describe('MultiTab - Display', () => {
     await RecordViewPage.verifyHTLMContent('RecordViewDisplay_002_Tab2.html');
   });
 
-  it.only('Display_003 - Verify "Remember last selected tab" feature work correctly', async () => {
+  it('Display_003 - Verify "Remember last selected tab" feature work correctly', async () => {
     // Setting remember last selected tab
     await SystemPluginSettingPage.open(appSettingUrl);
     await SystemPluginSettingPage.clickPluginSettingIcon();
@@ -129,7 +129,7 @@ describe('MultiTab - Display', () => {
     await browser.url(detailScreenURL);
     await RecordAddPage.verifyIsSelectedTab('blank_space_tab5');
     await RecordAddPage.verifyHTLMContent('RecordViewDisplay_003_Tab5.html');
-
+    await RecordAddPage.clickCancelBtn();
   });
 
   it.skip('Display_004 - Verify multi-tab display correctly if there is multiple sections of multi-tab', async () => {
@@ -168,7 +168,7 @@ describe('MultiTab - Display', () => {
     await RecordAddPage.clickCancelBtn();
   });
 
-  it('Display_006 - Verify multi-tab display correctly if there is a field removed out of to any tab', async () => {
+  it.skip('Display_006 - Verify multi-tab display correctly if there is a field removed out of to any tab', async () => {
     const removedFields = [Object.keys(addedField)[0]]; // --> field "Added_Field_Text1"
     await removeFormField(kintoneClient, plugins.multiTab.testingAppId, removedFields);
     await RecordAddPage.open(recordAddUrl);
