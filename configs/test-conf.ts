@@ -35,6 +35,7 @@ export const getTestingAppId = async (plugin) => {
     console.log('testingAppUrl: ---- ', testingAppUrl);
     // @ts-ignore
     testingAppId = testingAppUrl.match(/(?<=k\/)\d+/);
+    console.log('testingAppId: ---- ', testingAppId);
   }
   return testingAppId;
 };
