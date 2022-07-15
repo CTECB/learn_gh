@@ -3,9 +3,10 @@ import { PluginConfigPage } from '@pages/multi-tab/PluginConfig';
 import { AppSettingPage } from '@pages/common/AppSetting';
 import { credentials, plugins } from '@configs/test-conf';
 
-const appSettingUrl = `k/admin/app/${plugins.multiTab.testingAppId}/plugin/#/`;
+describe('MultiTab - Settings', async () => {
+  const pls = await plugins();
+  const appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
 
-describe('MultiTab - Settings', () => {
   before('Login', async () => {
     await SystemPluginSettingPage.open(appSettingUrl);
     await SystemPluginSettingPage.login(credentials);
@@ -17,10 +18,10 @@ describe('MultiTab - Settings', () => {
       await SystemPluginSettingPage.removePlugin();
     }
 
-    await SystemPluginSettingPage.addPluginById(plugins.multiTab.id);
-    await SystemPluginSettingPage.verifyPluginDisplayed(plugins.multiTab.name);
+    await SystemPluginSettingPage.addPluginById(pls.multiTab.id);
+    await SystemPluginSettingPage.verifyPluginDisplayed(pls.multiTab.name);
     await SystemPluginSettingPage.clickPluginSettingIcon();
-    await PluginConfigPage.verifyPluginVersion(plugins.multiTab.version);
+    await PluginConfigPage.verifyPluginVersion(pls.multiTab.version);
   });
 
   it('Setting_002: Verify plugin can be set successfully - section 1', async () => {

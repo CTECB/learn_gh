@@ -43,17 +43,40 @@ export const getTestingAppId = async (plugin) => {
   return testingAppId;
 };
 
-export const plugins = {
+const PLUGINS = {
   multiTab: {
     name: 'Multi Tab Plugin',
     id: 'hjimeoiicpfillgjebafbijognopkcfn',
     version: '3.2.1',
-    testingAppId: process.env.MULTI_TAB_APP || getTestingAppId('multiTab'),
+    testingAppId: '',
   },
   conditionalDisplay: {
     name: 'Conditional Display Plugin',
     id: '<id>',
     version: '<version>',
-    testingAppId: process.env.CONDITIONAL_DISPLAY_APP || getTestingAppId('conditionalDisplay'),
+    testingAppId: '',
   },
 };
+
+export const plugins = async () => {
+  const pls = PLUGINS;
+  for (const [key, value] of Object.entries(pls)) {
+    value.testingAppId = await getTestingAppId(key);
+  }
+  return pls;
+};
+//
+// export const plugins1 = {
+//   multiTab: {
+//     name: 'Multi Tab Plugin',
+//     id: 'hjimeoiicpfillgjebafbijognopkcfn',
+//     version: '3.2.1',
+//     testingAppId: process.env.MULTI_TAB_APP || getTestingAppId('multiTab'),
+//   },
+//   conditionalDisplay: {
+//     name: 'Conditional Display Plugin',
+//     id: '<id>',
+//     version: '<version>',
+//     testingAppId: process.env.CONDITIONAL_DISPLAY_APP || getTestingAppId('conditionalDisplay'),
+//   },
+// };

@@ -7,10 +7,14 @@ import { addFormField, moveField, removeFormField } from '@utils/kintoneAPIs/for
 import { credentials, plugins, testingSiteDomain } from '@configs/test-conf';
 import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 
-const appSettingUrl = `k/admin/app/${plugins.multiTab.testingAppId}/plugin/#/`;
-const recordAddUrl = `k/${plugins.multiTab.testingAppId}/edit`;
+// const appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
+// const recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
 
-describe('MultiTab - Display', () => {
+describe('MultiTab - Display', async () => {
+  const pls = await plugins();
+  const appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
+  const recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
+
   const addedField = {
     Added_Field_Text1:
     {
@@ -38,7 +42,7 @@ describe('MultiTab - Display', () => {
     if (await SystemPluginSettingPage.getNumberOfPlugins() > 0) {
       await SystemPluginSettingPage.removePlugin();
     }
-    await SystemPluginSettingPage.addPluginById(plugins.multiTab.id);
+    await SystemPluginSettingPage.addPluginById(pls.multiTab.id);
   });
 
   it('Display_001 - Verify multi-tab display correctly if the number of tabs greater than 1', async () => {
@@ -160,8 +164,8 @@ describe('MultiTab - Display', () => {
   });
 
   it.skip('Display_005 - Verify multi-tab display correctly if there is new field added to any tab', async () => {
-    await addFormField(kintoneClient, plugins.multiTab.testingAppId, addedField);
-    await moveField(kintoneClient, plugins.multiTab.testingAppId, 5);
+    await addFormField(kintoneClient, pls.multiTab.testingAppId, addedField);
+    await moveField(kintoneClient, pls.multiTab.testingAppId, 5);
     await RecordAddPage.open(recordAddUrl);
     await RecordAddPage.clickTab('blank_space_tab1');
     await RecordAddPage.verifyHTLMContent('RecordAddDisplay_005.html');
@@ -170,7 +174,7 @@ describe('MultiTab - Display', () => {
 
   it.skip('Display_006 - Verify multi-tab display correctly if there is a field removed out of to any tab', async () => {
     const removedFields = [Object.keys(addedField)[0]]; // --> field "Added_Field_Text1"
-    await removeFormField(kintoneClient, plugins.multiTab.testingAppId, removedFields);
+    await removeFormField(kintoneClient, pls.multiTab.testingAppId, removedFields);
     await RecordAddPage.open(recordAddUrl);
     await RecordAddPage.clickTab('blank_space_tab1');
     await RecordAddPage.verifyHTLMContent('RecordAddDisplay_006.html');
