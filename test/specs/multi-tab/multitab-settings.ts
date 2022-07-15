@@ -6,6 +6,7 @@ import { credentials, plugins } from '@configs/test-conf';
 describe('MultiTab - Settings', async () => {
   const pls = await plugins();
   const appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
+  console.log('this is plugin info: ---- ', pls);
 
   before('Login', async () => {
     await SystemPluginSettingPage.open(appSettingUrl);

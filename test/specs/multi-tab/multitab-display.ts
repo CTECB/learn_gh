@@ -12,6 +12,7 @@ import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 
 describe('MultiTab - Display', async () => {
   const pls = await plugins();
+  console.log('this is plugin info: ---- ', pls);
   const appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
   const recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
 
