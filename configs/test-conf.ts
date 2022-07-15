@@ -1,4 +1,4 @@
-import { KintoneRestAPIClient } from "@kintone/rest-api-client";
+import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 
 export const testingSiteDomain = process.env.TESTING_SITE_DOMAIN || '<teting_site>';
 
@@ -22,6 +22,7 @@ export const getTestingAppId = async (plugin) => {
     const queryByPlugin = `ddlPluginName in ("${plugin}")`;
     // @ts-ignore
     const pluginRecord = (await kintoneClient.record.getRecords({ app: process.env.TEST_MANAGEMENT_APP_ID, query: queryByPlugin })).records[0];
+    console.log('pluginRecord: ---- ', pluginRecord);
     const recordNumber = pluginRecord['Record_number'].value;
 
     const { record } = await kintoneClient.record.getRecord({
@@ -31,10 +32,11 @@ export const getTestingAppId = async (plugin) => {
       id: recordNumber,
     });
     const testingAppUrl = record['txtTestingAppUrl'].value;
+    console.log('testingAppUrl: ---- ', testingAppUrl);
     // @ts-ignore
     testingAppId = testingAppUrl.match(/(?<=k\/)\d+/);
   }
-  return testingAppId
+  return testingAppId;
 };
 
 export const plugins = {
