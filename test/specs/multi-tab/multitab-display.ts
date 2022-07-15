@@ -11,10 +11,7 @@ import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 // const recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
 
 describe('MultiTab - Display', async () => {
-  const pls = await plugins();
-  console.log('this is plugin info: ---- ', pls);
-  const appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
-  const recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
+  let pls, appSettingUrl, recordAddUrl;
 
   const addedField = {
     Added_Field_Text1:
@@ -38,6 +35,11 @@ describe('MultiTab - Display', async () => {
   });
 
   before('Add plugin', async () => {
+    pls = await plugins();
+    console.log('this is plugin info: ---- ', pls);
+    appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
+    recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
+
     await SystemPluginSettingPage.open(appSettingUrl);
     await SystemPluginSettingPage.login(credentials);
     if (await SystemPluginSettingPage.getNumberOfPlugins() > 0) {
