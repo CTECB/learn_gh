@@ -1,6 +1,8 @@
 import { LoginPage } from './Login';
 import { pageUtil } from '@utils/PageUtil';
 
+const HOME_PAGE_ICN = '.gaia-header-img-home';
+
 export default class BasePage {
   public async open(path: string = '', waitForTargetElement: string | undefined = undefined) {
     await browser.url(`${browser.config.baseUrl}/${path}`);
@@ -15,5 +17,10 @@ export default class BasePage {
       await LoginPage.loginBtn.waitForDisplayed({ reverse: true });
       await browser.pause(1000);
     }
+  }
+
+  public async clickHomePageIcon() {
+    await $(HOME_PAGE_ICN).click();
+    await pageUtil.waitForPageReady();
   }
 }

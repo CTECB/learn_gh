@@ -1,11 +1,11 @@
 import { SystemPluginSettingPage } from '@pages/common/SystemPluginSetting';
 import { PluginConfigPage } from '@pages/multi-tab/PluginConfig';
 import { AppSettingPage } from '@pages/common/AppSetting';
-import { credentials, plugins, testingApps } from '@configs/test-conf';
+import { credentials, plugins } from '@configs/test-conf';
 
-const appSettingUrl = `k/admin/app/${testingApps.multiTab}/plugin/#/`;
+const appSettingUrl = `k/admin/app/${plugins.multiTab.testingAppId}/plugin/#/`;
 
-describe('Multi-Tab - Settings', () => {
+describe('MultiTab - Settings', () => {
   before('Login', async () => {
     await SystemPluginSettingPage.open(appSettingUrl);
     await SystemPluginSettingPage.login(credentials);
@@ -13,7 +13,7 @@ describe('Multi-Tab - Settings', () => {
 
   it('Setting_001: Verify plugin can be added into app successfully', async () => {
     // Remove plugin if existing before testing adding plugin
-    if (await SystemPluginSettingPage.elmPluginItem.length > 0) {
+    if (await SystemPluginSettingPage.getNumberOfPlugins() > 0) {
       await SystemPluginSettingPage.removePlugin();
     }
 
@@ -37,6 +37,7 @@ describe('Multi-Tab - Settings', () => {
       'blank_space_start_2',
       'blank_space_tab6',
       'blank_space_tab7',
+      'blank_space_tab8',
       'blank_space_end_2'
     ];
     const actualStartTabItems = await PluginConfigPage.getStartTabItems(1);
@@ -48,7 +49,7 @@ describe('Multi-Tab - Settings', () => {
     await PluginConfigPage.selectStartTabItem(1, 'blank_space_start_1');
     await PluginConfigPage.selectEndTabItem(1, 'blank_space_end_1');
     await PluginConfigPage.clickSubmit();
-    await SystemPluginSettingPage.elmSettingNav.click();
+    await SystemPluginSettingPage.clickSettingNavigation();
     await AppSettingPage.updateApp();
 
     // - Verify settings reflect on setting screen
@@ -83,6 +84,7 @@ describe('Multi-Tab - Settings', () => {
       'blank_space_start_2',
       'blank_space_tab6',
       'blank_space_tab7',
+      'blank_space_tab8',
       'blank_space_end_2'
     ];
     const actualStartTabItems = await PluginConfigPage.getStartTabItems(2);
@@ -94,7 +96,7 @@ describe('Multi-Tab - Settings', () => {
     await PluginConfigPage.selectStartTabItem(2, 'blank_space_start_2');
     await PluginConfigPage.selectEndTabItem(2, 'blank_space_end_2');
     await PluginConfigPage.clickSubmit();
-    await SystemPluginSettingPage.elmSettingNav.click();
+    await SystemPluginSettingPage.clickSettingNavigation();
     await AppSettingPage.updateApp();
 
     // - Verify settings reflect on setting screen
@@ -107,6 +109,7 @@ describe('Multi-Tab - Settings', () => {
     const expectedTabInfo = [
       { blankSpaceId: 'blank_space_tab6', isDefault: true, isEnabled: true, tabName: 'blank_space_tab6' },
       { blankSpaceId: 'blank_space_tab7', isDefault: false, isEnabled: true, tabName: 'blank_space_tab7' },
+      { blankSpaceId: 'blank_space_tab8', isDefault: false, isEnabled: true, tabName: 'blank_space_tab8' },
     ];
     await PluginConfigPage.verifyTabSelectionList(2, expectedTabInfo);
   });

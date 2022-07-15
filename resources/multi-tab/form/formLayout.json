@@ -1,0 +1,711 @@
+{
+    "layout": [
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_start_1",
+                    "size": {
+                        "width": "1124",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab1",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div>For tab 1<br /></div>",
+                    "size": {
+                        "width": "87"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "USER_SELECT",
+                    "code": "Tab1_User_selection",
+                    "size": {
+                        "width": "344"
+                    }
+                },
+                {
+                    "type": "GROUP_SELECT",
+                    "code": "Tab1_Group_selection",
+                    "size": {
+                        "width": "344"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "DATE",
+                    "code": "Tab1_Date",
+                    "size": {
+                        "width": "117"
+                    }
+                },
+                {
+                    "type": "TIME",
+                    "code": "Tab1_Time",
+                    "size": {
+                        "width": "101"
+                    }
+                },
+                {
+                    "type": "DATETIME",
+                    "code": "Tab1_Date_and_time",
+                    "size": {
+                        "width": "196"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "",
+                    "size": {
+                        "width": "117",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "Tab1_Text_1",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "LINK",
+                    "code": "Tab1_Link",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "NUMBER",
+                    "code": "Tab1_Number_1",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "CALC",
+                    "code": "Tab1_Calculated_1",
+                    "size": {
+                        "width": "193"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "Tab1_Text_2",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "CALC",
+                    "code": "Tab1_Calculated_2",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "NUMBER",
+                    "code": "Tab1_Number_2",
+                    "size": {
+                        "width": "193"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "MULTI_LINE_TEXT",
+                    "code": "Tab1_Text_area",
+                    "size": {
+                        "width": "315",
+                        "innerHeight": "125"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "",
+                    "size": {
+                        "width": "117",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "RICH_TEXT",
+                    "code": "Tab1_Rich_text",
+                    "size": {
+                        "width": "315",
+                        "innerHeight": "125"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "RADIO_BUTTON",
+                    "code": "Tab1_Radio_button",
+                    "size": {
+                        "width": "241"
+                    }
+                },
+                {
+                    "type": "CHECK_BOX",
+                    "code": "Tab1_Check_box_1",
+                    "size": {
+                        "width": "241"
+                    }
+                },
+                {
+                    "type": "DROP_DOWN",
+                    "code": "Tab1_Drop_down",
+                    "size": {
+                        "width": "196"
+                    }
+                },
+                {
+                    "type": "MULTI_SELECT",
+                    "code": "Tab1_Multi_choice_1",
+                    "size": {
+                        "width": "197"
+                    }
+                },
+                {
+                    "type": "MULTI_SELECT",
+                    "code": "Tab1_Multi_choice_2",
+                    "size": {
+                        "width": "197"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "CHECK_BOX",
+                    "code": "Tab1_Check_box_2",
+                    "size": {
+                        "width": "241"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "SUBTABLE",
+            "code": "Tab1_Table",
+            "fields": [
+                {
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "Tab1_table_Text",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "FILE",
+                    "code": "Tab1_table_Attachment",
+                    "size": {
+                        "width": "207"
+                    }
+                },
+                {
+                    "type": "DROP_DOWN",
+                    "code": "Tab1_table_Drop_down",
+                    "size": {
+                        "width": "196"
+                    }
+                },
+                {
+                    "type": "CHECK_BOX",
+                    "code": "Tab1_table_Check_box",
+                    "size": {
+                        "width": "238"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "GROUP",
+            "code": "Tab1_Field_group",
+            "layout": [
+                {
+                    "type": "ROW",
+                    "fields": [
+                        {
+                            "type": "FILE",
+                            "code": "Tab1_fieldgroup_Attachment",
+                            "size": {
+                                "width": "207"
+                            }
+                        },
+                        {
+                            "type": "RICH_TEXT",
+                            "code": "Tab1_fieldgroup_Rich_text",
+                            "size": {
+                                "width": "315",
+                                "innerHeight": "125"
+                            }
+                        },
+                        {
+                            "type": "MULTI_SELECT",
+                            "code": "Tab1_fieldgroup_Multi_choice",
+                            "size": {
+                                "width": "197"
+                            }
+                        },
+                        {
+                            "type": "DROP_DOWN",
+                            "code": "Tab1_fieldgroup_Dropdown",
+                            "size": {
+                                "width": "196"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab2",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "",
+                    "size": {
+                        "width": "117",
+                        "height": "66"
+                    }
+                },
+                {
+                    "type": "LABEL",
+                    "label": "<div>For tab 2<br /></div>",
+                    "size": {
+                        "width": "87"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "DATETIME",
+                    "code": "Tab2_Date_and_time",
+                    "size": {
+                        "width": "196"
+                    }
+                },
+                {
+                    "type": "TIME",
+                    "code": "Tab2_Time",
+                    "size": {
+                        "width": "101"
+                    }
+                },
+                {
+                    "type": "DATE",
+                    "code": "Tab2_Date",
+                    "size": {
+                        "width": "117"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "GROUP_SELECT",
+                    "code": "Tab2_Group_selection",
+                    "size": {
+                        "width": "344"
+                    }
+                },
+                {
+                    "type": "USER_SELECT",
+                    "code": "Tab2_User_selection",
+                    "size": {
+                        "width": "344"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "Tab2_Text",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "LINK",
+                    "code": "Tab2_Link",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "NUMBER",
+                    "code": "Tab2_Number",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "CALC",
+                    "code": "Tab2_Calculated",
+                    "size": {
+                        "width": "193"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab3",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div>For tab 3: empty<br /></div>",
+                    "size": {
+                        "width": "132"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab4",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div>For tab 4: empty field group<br /></div>",
+                    "size": {
+                        "width": "200"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "GROUP",
+            "code": "Tab4_Field_group",
+            "layout": []
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab5",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div>For tab 5<br /></div>",
+                    "size": {
+                        "width": "132"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "USER_SELECT",
+                    "code": "Tab5_User_selection",
+                    "size": {
+                        "width": "344"
+                    }
+                },
+                {
+                    "type": "FILE",
+                    "code": "Tab5_Attachment",
+                    "size": {
+                        "width": "207"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_end_1",
+                    "size": {
+                        "width": "1124",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div>Multi-tab - Section 2<br /></div>",
+                    "size": {
+                        "width": "155"
+                    }
+                },
+                {
+                    "type": "HR",
+                    "size": {
+                        "width": "424"
+                    }
+                },
+                {
+                    "type": "LABEL",
+                    "label": "<div>Multi-tab - Section 2<br /></div>",
+                    "size": {
+                        "width": "155"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_start_2",
+                    "size": {
+                        "width": "1124",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab6",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div>For tab 6<br /></div>",
+                    "size": {
+                        "width": "132"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "DATETIME",
+                    "code": "Tab6_Date_and_time",
+                    "size": {
+                        "width": "196"
+                    }
+                },
+                {
+                    "type": "TIME",
+                    "code": "Tab6_Time",
+                    "size": {
+                        "width": "101"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab7",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "HR",
+                    "size": {
+                        "width": "485"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_tab8",
+                    "size": {
+                        "width": "579",
+                        "height": "66"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div>For tab 8<br /></div>",
+                    "size": {
+                        "width": "132"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "DATETIME",
+                    "code": "Tab8_Date_and_time",
+                    "size": {
+                        "width": "196"
+                    }
+                },
+                {
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "Tab8_Text",
+                    "size": {
+                        "width": "193"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "SPACER",
+                    "elementId": "blank_space_end_2",
+                    "size": {
+                        "width": "1124",
+                        "height": "66"
+                    }
+                }
+            ]
+        }
+    ],
+    "revision": "93"
+}

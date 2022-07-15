@@ -10,7 +10,7 @@ on:
         default: multiTab
         options:
           - multiTab
-          - conditional
+          - conditionalDisplay
       testFilter:
         type: string
         description: 'Filter test by test description'
@@ -22,9 +22,9 @@ on:
 #  - cron:  '0 * * * *'
 
 env:
-  DOMAIN: ${{ secrets.DOMAIN }}
-  LOGIN_NAME: ${{ secrets.LOGIN_NAME }}
-  PASSWORD: ${{ secrets.PASSWORD }}
+  TESTING_SITE_DOMAIN: ${{ secrets.TESTING_SITE_DOMAIN }}
+  TESTING_SITE_USERNAME: ${{ secrets.TESTING_SITE_USERNAME }}
+  TESTING_SITE_PASSWORD: ${{ secrets.TESTING_SITE_PASSWORD }}
   SPEC_RETRIES: 2
 
 jobs:
@@ -33,11 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-        shell: bash
+#      - name: Dump GitHub context
+#        env:
+#          GITHUB_CONTEXT: ${{ toJSON(github) }}
+#        run: echo "$GITHUB_CONTEXT"
+#        shell: bash
       - name: Get start time
         run: |
           currentTime=$(date +'%c')
@@ -55,6 +55,7 @@ jobs:
           echo "SPEC_RETRIES=${{ env.SPEC_RETRIES }}" >> $GITHUB_ENV
       - name: Print all parameters
         run: |
+          echo "::notice title=Using workflow from branch::${GITHUB_REF##*/}"
           message="Testing plugin: ${{ env.KINTONE_PLUGIN }} - Test suites: ${{ env.TEST_SUITES }}"
           echo "::notice title=Test info::$message"
     outputs:
@@ -72,9 +73,9 @@ jobs:
         with:
           specRetries: ${{ needs.validate-inputs.outputs.specRetries }}
           kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
-          domain: ${{ secrets.DOMAIN }}
-          loginName: ${{ secrets.loginName }}
-          password: ${{ secrets.password }}
+          domain: ${{ secrets.TESTING_SITE_DOMAIN }}
+          loginName: ${{ secrets.TESTING_SITE_USERNAME }}
+          password: ${{ secrets.TESTING_SITE_PASSWORD }}
 
   allure-report:
     runs-on: ubuntu-latest

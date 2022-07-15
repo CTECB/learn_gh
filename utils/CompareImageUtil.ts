@@ -55,6 +55,7 @@ class CompareImageUtil {
       this.defaultOptions.removeElements = hideElements;
     }
 
+    // @ts-ignore
     const actDiff = await browser.checkFullPageScreen(
       `page-${pageName}`,
       this.defaultOptions
@@ -74,6 +75,7 @@ class CompareImageUtil {
       this.defaultOptions.removeElements = hideElements;
     }
 
+    // @ts-ignore
     const actDiff = await browser.checkScreen(
       `screen-${screenName}`,
       this.defaultOptions

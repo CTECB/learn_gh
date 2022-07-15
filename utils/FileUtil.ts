@@ -6,7 +6,9 @@ class FileUtil {
     regex.forEach(value => {
       contents = contents.replace(value, '%replaced%');
     });
-    // await fs.writeFile('GetExpResultFile_replaced.html', contents, { encoding: 'utf8' });
+    // workaround for the case this class is added after updating form layout via API
+    contents = contents.replace(/control-horizon-gaia /g, '');
+    await fs.writeFile('GetExpResultFile_replaced.html', contents, { encoding: 'utf8' });
 
     return contents;
   };

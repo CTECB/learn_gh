@@ -4,5 +4,8 @@ node_modules/
 .idea
 allure-report/*
 allure-results/*
-tools/test-result-manage/dist
 tmp
+utils/test-management/node_modules
+utils/test-management/dist
+GetExpResultFile_replaced.html
+GetHtmlResult.html

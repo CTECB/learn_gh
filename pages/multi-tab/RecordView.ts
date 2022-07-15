@@ -1,17 +1,23 @@
 import BasePage from '@pages/common/BasePage';
 import { fileUtil } from '@utils/FileUtil';
+import { pageUtil } from '@utils/PageUtil';
 import fs from 'fs/promises';
 import path from 'path';
+import { sprintf } from 'sprintf-js';
 
 const RECORD_BODY = '#record-gaia';
+const TAB_BTN = '//div[@class="tab-wrapped"]/button[text()="%s"]';
 
 class RecordView extends BasePage {
-  public getRecordBodyHtml = async (regex: RegExp[], isSaveResult = false) => {
-    await browser.pause(1000);
+  public async getRecordBodyHtml(regex: RegExp[], isSaveResult = true) {
+    await pageUtil.waitForPageReady();
+    await browser.pause(3000);
     let recordBody = await $(RECORD_BODY).getHTML();
     regex.forEach(value => {
       recordBody = recordBody.replace(value, '%replaced%');
     });
+    // workaround for the case this class is added after updating form layout via API
+    recordBody = recordBody.replace(/control-horizon-gaia /g, '');
 
     if (isSaveResult) {
       await fs.writeFile('GetHtmlResult.html', recordBody, { encoding: 'utf8' });
@@ -20,7 +26,12 @@ class RecordView extends BasePage {
     return recordBody;
   };
 
-  public verifyHTLMContent = async (expectedContentFileName: string) => {
+  public verifyIsSelectedTab = async (tabName: string) => {
+    const selector = sprintf(TAB_BTN, tabName);
+    await expect($(selector)).toHaveElementClass('submit');
+  };
+  
+  public async verifyHTLMContent(expectedContentFileName: string) {
     const specificIdRegex = /for="\d+"|id="\d+"|(?<=id=")\S*(?=html5)/g;
     const generalDynamicStringRegex = /(\S+\d+.\d+.(:((\d+)|(\w+)).\w+)?)/g;
     const specificWidthRegex = /(?<=border-box; width: )\d+/g;

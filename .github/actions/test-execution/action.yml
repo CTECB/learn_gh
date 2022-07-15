@@ -27,14 +27,11 @@ runs:
     - uses: actions/setup-node@v2
       with:
         node-version: 16
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJSON(github) }}
-      run: echo "$GITHUB_CONTEXT"
-      shell: bash
-    - name: Test it
-      run: echo "This is test"
-      shell: bash
+    - uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: cache-test-execution_modules-${{ hashFiles('package-lock.json') }}
+        restore-keys: cache-test-execution_modules-${{ hashFiles('package-lock.json') }}
 #    - name: Upgrade chrome and get appropriate chromedriver version
 #      run: |
 #        sudo apt-get update
@@ -45,13 +42,13 @@ runs:
 #        echo "CHROMEDRIVER_VERSION=$chromedriverVersion" >> $GITHUB_ENV
 #      shell: bash
     - name: Start selenium docker
-      run: docker compose -f tools/docker/docker-compose.yml up -d
+      run: docker compose -f utils/docker/docker-compose.yml up -d
       shell: bash
     - name: Install npm packages
       run: npm install
       shell: bash
     - name: Execute test for [${{ inputs.kintonePlugin }}]
-      run: npm run test:${{ inputs.kintonePlugin }}
+      run: npm run test:ci -- --suite ${{ inputs.kintonePlugin }}
       shell: bash
       env:
         DOMAIN: ${{ inputs.domain }}

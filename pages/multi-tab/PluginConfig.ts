@@ -15,10 +15,10 @@ const END_TAB_ITEM = `${END_TAB_DDL}//div[@class="kuc-list-outer"]//*[@class="ku
 const END_TAB_ITEMS = `${END_TAB_DDL}//div[@class="kuc-list-outer"]//div[contains(@class,"kuc-list-item")]//span[@class="kuc-list-item-label"]`;
 const TAB_SELECTION_TABLE = '//div[@class="table-tab-row"][%d]/div[@class="table-tab-right"]//div[@class="kuc-table-tbody"]';
 const TAB_SELECTION_LIST = `${TAB_SELECTION_TABLE}//div[@class="kuc-table-tr"]`;
+const LAST_SELECTED_TAB_CBX = '//div[@class="table-tab-row"][1]/div[@class="table-tab-left"]//div[@class="kuc-input-checkbox"]//input[@type="checkbox"]';
 const ENABLE_TAB_CBX = `${TAB_SELECTION_LIST}[%d]//input[@type="checkbox"]`;
 const DEFAULT_TAB_RAD = `${TAB_SELECTION_LIST}[%d]//input[@type="radio"]`;
 const ADD_SECTION_ICN = '.table-tab-add';
-
 const SUBMIT_BTN = '.plugin-layout .button-group__save';
 
 class PluginConfig extends BasePage {
@@ -75,6 +75,14 @@ class PluginConfig extends BasePage {
         await actionUtil.clickElementByJS(selector);
         await browser.pause(1000);
       }
+    }
+  }
+
+  public async setLastSelectedTab(section: number, isChecked: boolean) {
+      const selector = sprintf(LAST_SELECTED_TAB_CBX, section);
+      if (await $(selector).isSelected() !== isChecked) {
+        await actionUtil.clickElementByJS(selector);
+        await browser.pause(1000);
     }
   }
 

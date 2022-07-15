@@ -1,5 +1,5 @@
-import { updateTestManagementRecord } from '../test-result-manage/src/test-result-handler';
-import { TEST_MANAGEMENT_APP } from '../test-result-manage/src/config';
+import { updateTestManagementRecord } from '../test-management/src/test-result-handler';
+import { TEST_MANAGEMENT_APP } from '../test-management/src/config';
 
 (async () => {
   const data = {
@@ -11,7 +11,8 @@ import { TEST_MANAGEMENT_APP } from '../test-result-manage/src/config';
     allureReportUrl: process.env.ALLURE_REPORT_URL,
   };
   try {
-    await updateTestManagementRecord(TEST_MANAGEMENT_APP.appId, data, 'add');
+    const selectedPlugin = process.env.KINTONE_PLUGIN;
+    await updateTestManagementRecord(TEST_MANAGEMENT_APP.appId, data, selectedPlugin, 'add');
   } catch (e) {
     console.error(JSON.stringify(e, null, 2));
   }

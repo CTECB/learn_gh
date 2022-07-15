@@ -1,14 +1,11 @@
-import { desktopSuites } from '@configs/desktop-suites';
-import { getTestSpecs } from '@configs/getTestSpecs';
-import { testingSiteDomain } from "@configs/test-conf";
+import { desktopSuites } from '@configs/wdio/desktop-suites';
+import { getTestSpecs } from '@configs/wdio/getTestSpecs';
+import { testingSiteDomain } from '@configs/test-conf';
 
 const GRID = process.env.GRID || 'localhost:4444';
 const GRID_PATHS = GRID.split(':');
 const GRID_HOST = GRID_PATHS[0];
 const GRID_PORT = GRID.includes(':') ? parseInt(GRID_PATHS[1], 10) : 4444;
-// const drivers = {
-//   chrome: { version: process.env.CHROMEDRIVER_VERSION }, // https://chromedriver.chromium.org/
-// };
 
 export const config: WebdriverIO.Config = {
   protocol: 'http',
@@ -36,36 +33,10 @@ export const config: WebdriverIO.Config = {
   connectionRetryCount: 3,
 
   maxInstances: 1,
-  capabilities: [{
-    maxInstances: 1,
-    browserName: 'chrome',
-    'goog:chromeOptions': {
-      // to run chrome headless the following flags are required
-      // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
-      args: ['--headless', '--disable-gpu', 'no-sandbox', '--window-size=1920,1080'],
-    },
-    acceptInsecureCerts: true
-  }],
-  // services: [
-  //   ['selenium-standalone',
-  //     {
-  //       skipSeleniumInstall: false,
-  //     },
-  //     // {
-  //     //   installArgs: { drivers },
-  //     //   args: { drivers } // drivers to use
-  //     // }
-  //   ],
-  //   // 'image-comparison'
-  // ],
+  capabilities: [] as any,
   framework: 'mocha',
   reporters: [
-    [
-      'spec',
-      {
-        addConsoleLogs: true,
-      },
-    ],
+    'spec',
     [
       'allure',
       {

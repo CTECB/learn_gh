@@ -30,11 +30,11 @@ runs:
     - uses: actions/setup-node@v1
       with:
         node-version: 16
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJSON(github) }}
-      run: echo "$GITHUB_CONTEXT"
-      shell: bash
+    - uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: cache-kintone-report_modules-${{ hashFiles('package-lock.json') }}
+        restore-keys: cache-kintone-report_modules-${{ hashFiles('package-lock.json') }}
     - name: Install npm packages
       run: npm install
       shell: bash
@@ -44,7 +44,7 @@ runs:
       with:
         startTime: ${{ inputs.startTime }}
     - run: |
-        npx ts-node tools/ci/kintone-report.ts
+        npx ts-node utils/ci/kintone-report.ts
       shell: bash
       env:
         GITHUB_RUN_URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}

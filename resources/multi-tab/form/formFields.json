@@ -1,0 +1,604 @@
+{
+    "revision": "93",
+    "properties": {
+        "Tab1_Group_selection": {
+            "type": "GROUP_SELECT",
+            "code": "Tab1_Group_selection",
+            "label": "[Tab1] Group selection",
+            "noLabel": false,
+            "required": false,
+            "entities": [],
+            "defaultValue": []
+        },
+        "Tab1_Multi_choice_2": {
+            "type": "MULTI_SELECT",
+            "code": "Tab1_Multi_choice_2",
+            "label": "[Tab1] Multi-choice2",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample4": {
+                    "label": "sample4",
+                    "index": "3"
+                },
+                "sample3": {
+                    "label": "sample3",
+                    "index": "2"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": []
+        },
+        "Tab1_Multi_choice_1": {
+            "type": "MULTI_SELECT",
+            "code": "Tab1_Multi_choice_1",
+            "label": "[Tab1] Multi-choice1",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample4": {
+                    "label": "sample4",
+                    "index": "3"
+                },
+                "sample3": {
+                    "label": "sample3",
+                    "index": "2"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": []
+        },
+        "Tab2_Date_and_time": {
+            "type": "DATETIME",
+            "code": "Tab2_Date_and_time",
+            "label": "[Tab2] Date and time",
+            "noLabel": false,
+            "required": false,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": false
+        },
+        "Tab1_Field_group": {
+            "type": "GROUP",
+            "code": "Tab1_Field_group",
+            "label": "[Tab1] Field group",
+            "noLabel": false,
+            "openGroup": false
+        },
+        "Tab1_User_selection": {
+            "type": "USER_SELECT",
+            "code": "Tab1_User_selection",
+            "label": "[Tab1] User selection",
+            "noLabel": false,
+            "required": false,
+            "entities": [],
+            "defaultValue": []
+        },
+        "Tab2_Time": {
+            "type": "TIME",
+            "code": "Tab2_Time",
+            "label": "[Tab2] Time",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": "",
+            "defaultNowValue": false
+        },
+        "Tab1_Time": {
+            "type": "TIME",
+            "code": "Tab1_Time",
+            "label": "[Tab1] Time",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": "",
+            "defaultNowValue": false
+        },
+        "Tab1_Text_area": {
+            "type": "MULTI_LINE_TEXT",
+            "code": "Tab1_Text_area",
+            "label": "[Tab1] Text area",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": ""
+        },
+        "Tab1_fieldgroup_Dropdown": {
+            "type": "DROP_DOWN",
+            "code": "Tab1_fieldgroup_Dropdown",
+            "label": "Drop-down",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample6": {
+                    "label": "sample6",
+                    "index": "5"
+                },
+                "sample5": {
+                    "label": "sample5",
+                    "index": "4"
+                },
+                "sample4": {
+                    "label": "sample4",
+                    "index": "3"
+                },
+                "sample3": {
+                    "label": "sample3",
+                    "index": "2"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": ""
+        },
+        "Tab5_Attachment": {
+            "type": "FILE",
+            "code": "Tab5_Attachment",
+            "label": "[Tab5] Attachment",
+            "noLabel": false,
+            "required": false,
+            "thumbnailSize": "150"
+        },
+        "Tab2_Link": {
+            "type": "LINK",
+            "code": "Tab2_Link",
+            "label": "[Tab2] Link",
+            "noLabel": false,
+            "required": false,
+            "protocol": "WEB",
+            "minLength": "",
+            "maxLength": "",
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Tab1_Date": {
+            "type": "DATE",
+            "code": "Tab1_Date",
+            "label": "[Tab1] Date",
+            "noLabel": false,
+            "required": false,
+            "unique": false,
+            "defaultValue": "2022-05-19",
+            "defaultNowValue": false
+        },
+        "Tab1_Date_and_time": {
+            "type": "DATETIME",
+            "code": "Tab1_Date_and_time",
+            "label": "[Tab1] Date and time",
+            "noLabel": false,
+            "required": false,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": false
+        },
+        "Tab2_Number": {
+            "type": "NUMBER",
+            "code": "Tab2_Number",
+            "label": "[Tab2] Number",
+            "noLabel": false,
+            "required": false,
+            "minValue": "",
+            "maxValue": "",
+            "digit": false,
+            "unique": false,
+            "defaultValue": "",
+            "displayScale": "",
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "Tab6_Date_and_time": {
+            "type": "DATETIME",
+            "code": "Tab6_Date_and_time",
+            "label": "[Tab6] Date and time",
+            "noLabel": false,
+            "required": false,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": false
+        },
+        "Tab2_Calculated": {
+            "type": "CALC",
+            "code": "Tab2_Calculated",
+            "label": "[Tab2] Calculated",
+            "noLabel": false,
+            "required": false,
+            "expression": "Tab2_Number * 3",
+            "format": "NUMBER",
+            "displayScale": "",
+            "hideExpression": false,
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "Tab1_Text_2": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "Tab1_Text_2",
+            "label": "[Tab1] Text2",
+            "noLabel": false,
+            "required": false,
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
+            "hideExpression": false,
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Tab1_Text_1": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "Tab1_Text_1",
+            "label": "[Tab1] Text1",
+            "noLabel": false,
+            "required": false,
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
+            "hideExpression": false,
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Tab2_Group_selection": {
+            "type": "GROUP_SELECT",
+            "code": "Tab2_Group_selection",
+            "label": "[Tab2] Group selection",
+            "noLabel": false,
+            "required": false,
+            "entities": [],
+            "defaultValue": []
+        },
+        "Tab1_Table": {
+            "type": "SUBTABLE",
+            "code": "Tab1_Table",
+            "noLabel": false,
+            "label": "[Tab1] Table",
+            "fields": {
+                "Tab1_table_Text": {
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "Tab1_table_Text",
+                    "label": "Text",
+                    "noLabel": false,
+                    "required": false,
+                    "minLength": "",
+                    "maxLength": "",
+                    "expression": "",
+                    "hideExpression": false,
+                    "unique": false,
+                    "defaultValue": ""
+                },
+                "Tab1_table_Check_box": {
+                    "type": "CHECK_BOX",
+                    "code": "Tab1_table_Check_box",
+                    "label": "Check box",
+                    "noLabel": false,
+                    "required": false,
+                    "options": {
+                        "sample1": {
+                            "label": "sample1",
+                            "index": "0"
+                        },
+                        "sample2": {
+                            "label": "sample2",
+                            "index": "1"
+                        }
+                    },
+                    "defaultValue": [],
+                    "align": "HORIZONTAL"
+                },
+                "Tab1_table_Attachment": {
+                    "type": "FILE",
+                    "code": "Tab1_table_Attachment",
+                    "label": "Attachment",
+                    "noLabel": false,
+                    "required": false,
+                    "thumbnailSize": "150"
+                },
+                "Tab1_table_Drop_down": {
+                    "type": "DROP_DOWN",
+                    "code": "Tab1_table_Drop_down",
+                    "label": "Drop-down",
+                    "noLabel": false,
+                    "required": false,
+                    "options": {
+                        "sample1": {
+                            "label": "sample1",
+                            "index": "0"
+                        },
+                        "sample2": {
+                            "label": "sample2",
+                            "index": "1"
+                        }
+                    },
+                    "defaultValue": ""
+                }
+            }
+        },
+        "Tab1_Rich_text": {
+            "type": "RICH_TEXT",
+            "code": "Tab1_Rich_text",
+            "label": "[Tab1] Rich text",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": ""
+        },
+        "Tab1_Radio_button": {
+            "type": "RADIO_BUTTON",
+            "code": "Tab1_Radio_button",
+            "label": "[Tab1] Radio button",
+            "noLabel": false,
+            "required": true,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": "sample1",
+            "align": "HORIZONTAL"
+        },
+        "Tab5_User_selection": {
+            "type": "USER_SELECT",
+            "code": "Tab5_User_selection",
+            "label": "[Tab5] User selection",
+            "noLabel": false,
+            "required": false,
+            "entities": [],
+            "defaultValue": []
+        },
+        "Tab1_fieldgroup_Attachment": {
+            "type": "FILE",
+            "code": "Tab1_fieldgroup_Attachment",
+            "label": "Attachment",
+            "noLabel": false,
+            "required": false,
+            "thumbnailSize": "150"
+        },
+        "Tab1_Check_box_2": {
+            "type": "CHECK_BOX",
+            "code": "Tab1_Check_box_2",
+            "label": "[Tab1] Check box (horizontal)",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": [],
+            "align": "HORIZONTAL"
+        },
+        "Tab1_Calculated_2": {
+            "type": "CALC",
+            "code": "Tab1_Calculated_2",
+            "label": "[Tab1] Calculated2",
+            "noLabel": false,
+            "required": false,
+            "expression": "Tab1_Number_1 * 2",
+            "format": "NUMBER",
+            "displayScale": "",
+            "hideExpression": false,
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "Tab2_User_selection": {
+            "type": "USER_SELECT",
+            "code": "Tab2_User_selection",
+            "label": "[Tab2] User selection",
+            "noLabel": false,
+            "required": false,
+            "entities": [],
+            "defaultValue": []
+        },
+        "Tab1_Calculated_1": {
+            "type": "CALC",
+            "code": "Tab1_Calculated_1",
+            "label": "[Tab1] Calculated1",
+            "noLabel": false,
+            "required": false,
+            "expression": "Tab1_Number_1 * 2",
+            "format": "NUMBER",
+            "displayScale": "",
+            "hideExpression": false,
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "Tab1_Check_box_1": {
+            "type": "CHECK_BOX",
+            "code": "Tab1_Check_box_1",
+            "label": "[Tab1] Check box(vertical)",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": [],
+            "align": "VERTICAL"
+        },
+        "Tab1_fieldgroup_Multi_choice": {
+            "type": "MULTI_SELECT",
+            "code": "Tab1_fieldgroup_Multi_choice",
+            "label": "Multi-choice",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample4": {
+                    "label": "sample4",
+                    "index": "3"
+                },
+                "sample3": {
+                    "label": "sample3",
+                    "index": "2"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": []
+        },
+        "Tab2_Date": {
+            "type": "DATE",
+            "code": "Tab2_Date",
+            "label": "[Tab2] Date",
+            "noLabel": false,
+            "required": false,
+            "unique": false,
+            "defaultValue": "2022-05-20",
+            "defaultNowValue": false
+        },
+        "Tab1_Number_2": {
+            "type": "NUMBER",
+            "code": "Tab1_Number_2",
+            "label": "[Tab1] Number2",
+            "noLabel": false,
+            "required": false,
+            "minValue": "",
+            "maxValue": "",
+            "digit": false,
+            "unique": false,
+            "defaultValue": "",
+            "displayScale": "",
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "Tab1_Number_1": {
+            "type": "NUMBER",
+            "code": "Tab1_Number_1",
+            "label": "[Tab1] Number1",
+            "noLabel": false,
+            "required": false,
+            "minValue": "",
+            "maxValue": "",
+            "digit": false,
+            "unique": false,
+            "defaultValue": "",
+            "displayScale": "",
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "Tab1_Drop_down": {
+            "type": "DROP_DOWN",
+            "code": "Tab1_Drop_down",
+            "label": "[Tab1] Drop-down",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "sample1": {
+                    "label": "sample1",
+                    "index": "0"
+                },
+                "sample2": {
+                    "label": "sample2",
+                    "index": "1"
+                }
+            },
+            "defaultValue": ""
+        },
+        "Tab2_Text": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "Tab2_Text",
+            "label": "[Tab2] Text",
+            "noLabel": false,
+            "required": false,
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
+            "hideExpression": false,
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Tab8_Text": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "Tab8_Text",
+            "label": "[Tab8] Text2",
+            "noLabel": false,
+            "required": false,
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
+            "hideExpression": false,
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Tab1_fieldgroup_Rich_text": {
+            "type": "RICH_TEXT",
+            "code": "Tab1_fieldgroup_Rich_text",
+            "label": "Rich text",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": ""
+        },
+        "Tab1_Link": {
+            "type": "LINK",
+            "code": "Tab1_Link",
+            "label": "[Tab1] Link",
+            "noLabel": false,
+            "required": false,
+            "protocol": "WEB",
+            "minLength": "",
+            "maxLength": "",
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Tab6_Time": {
+            "type": "TIME",
+            "code": "Tab6_Time",
+            "label": "[Tab6] Time",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": "",
+            "defaultNowValue": false
+        },
+        "Tab8_Date_and_time": {
+            "type": "DATETIME",
+            "code": "Tab8_Date_and_time",
+            "label": "[Tab8] Date and time",
+            "noLabel": false,
+            "required": false,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": false
+        },
+        "Tab4_Field_group": {
+            "type": "GROUP",
+            "code": "Tab4_Field_group",
+            "label": "[Tab4] Field group",
+            "noLabel": false,
+            "openGroup": false
+        }
+    }
+}

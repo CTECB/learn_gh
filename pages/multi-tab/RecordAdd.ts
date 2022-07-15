@@ -12,33 +12,35 @@ const SAVE_BTN = '.gaia-ui-actionmenu-save';
 const TAB1_TEXT1_FIELD = '//span[@class="control-label-text-gaia" and text()="[Tab1] Text1"]/../../div[contains(@class,"control-value-gaia")]/div/input';
 
 class RecordAdd extends BasePage {
-  public clickTab = async (tabName: string) => {
+  public async clickTab(tabName: string) {
     await $(sprintf(TAB_BTN, tabName)).click();
-    await browser.pause(2000);
+    await browser.pause(4000);
   };
 
-  public clickCancelBtn = async () => {
+  public async clickCancelBtn() {
     await $(CANCEL_BTN).click();
   };
 
-  public clickSaveBtn = async () => {
+  public async clickSaveBtn() {
     await $(SAVE_BTN).click();
     await pageUtil.waitForPageReady(pageUtil.loadingSpinner(), false);
     await browser.pause(4000);
   };
 
-  public verifyIsSelectedTab = async (tabName: string) => {
+  public async verifyIsSelectedTab(tabName: string) {
     const selector = sprintf(TAB_BTN, tabName);
     await expect($(selector)).toHaveElementClass('submit');
   };
 
-  public getRecordBodyHtml = async (regex: RegExp[], isSaveResult = true) => {
+  public async getRecordBodyHtml(regex: RegExp[], isSaveResult = true) {
     await pageUtil.waitForPageReady();
-    await browser.pause(1000);
+    await browser.pause(3000);
     let recordBody = await $(RECORD_BODY).getHTML();
     regex.forEach(value => {
       recordBody = recordBody.replace(value, '%replaced%');
     });
+    // workaround for the case this class is added after updating form layout via API
+    recordBody = recordBody.replace(/control-horizon-gaia /g, '');
 
     if (isSaveResult) {
       await fs.writeFile('GetHtmlResult.html', recordBody, { encoding: 'utf8' });
@@ -47,7 +49,7 @@ class RecordAdd extends BasePage {
     return recordBody;
   };
 
-  public verifyHTLMContent = async (expectedContentFileName: string) => {
+  public async verifyHTLMContent(expectedContentFileName: string) {
     const specificIdRegex = /for="\d+"|id="\d+"|(?<=id=")\S*(?=html5)|((?<==":)(?:\S+)(?="))/g;
     const generalDynamicStringRegex = /(\S+\d+.\d+.(:((\d+)|(\w+)).\w+)?)/g;
     const specificWidthRegex = /(?<=border-box; width: )\d+/g;
@@ -60,7 +62,7 @@ class RecordAdd extends BasePage {
     expect(actualContent).toEqual(expectedContent);
   };
 
-  public inputTab1Data = async () => {
+  public async inputTab1Data() {
     await $(TAB1_TEXT1_FIELD).setValue('Tab1 Text1 Value');
   };
 }

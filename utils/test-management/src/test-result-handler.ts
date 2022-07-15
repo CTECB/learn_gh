@@ -1,13 +1,13 @@
-import { FIELD_CODES, TEST_MANAGEMENT_APP } from './config';
 import { KintoneRestAPIClient, KintoneRestAPIError } from '@kintone/rest-api-client';
+import { FIELD_CODES, TEST_MANAGEMENT_APP } from './config';
 
 const kintoneRestApiClient = new KintoneRestAPIClient({
-  baseUrl: TEST_MANAGEMENT_APP.kintoneURL || 'https://sdd-demo.cybozu.com',
-  auth: { apiToken: TEST_MANAGEMENT_APP.apiToken || 'yqBptSVGRYfoCGPyT4q6vzKVToI7Y7aR9MeeTx0y' },
+  baseUrl: TEST_MANAGEMENT_APP.kintoneURL,
+  auth: { apiToken: TEST_MANAGEMENT_APP.apiToken },
 });
 
-export const updateTestManagementRecord = async (appId: string, data: any, action: string = '') => {
-  const queryByPlugin = `ddlPluginName in ("${TEST_MANAGEMENT_APP.pluginName}")`;
+export const updateTestManagementRecord = async (appId: string, data: any, selectedPlugin: string | undefined, action: string = '') => {
+  const queryByPlugin = `ddlPluginName in ("${selectedPlugin}")`;
   const pluginRecord = (await kintoneRestApiClient.record.getRecords({ app: appId, query: queryByPlugin })).records[0];
 
   const historyTable: any = pluginRecord[FIELD_CODES.tblTestHistory].value;
@@ -30,17 +30,29 @@ export const updateTestManagementRecord = async (appId: string, data: any, actio
     console.log('new history: ----- ', historyTable);
   }
 
+  let recordData: any = {
+    tblTestHistory: {
+      value: historyTable,
+    },
+  };
+  if (data.status !== undefined) {
+    recordData.ddlTestStatus = { value: data.status };
+  }
+  if (data.testingAppUrl !== undefined) {
+    recordData.txtTestingAppUrl = { value: data.testingAppUrl };
+  }
   try {
     const record = await kintoneRestApiClient.record.updateRecord({
       app: appId,
       // @ts-ignore
       id: pluginRecord.$id.value,
-      record: {
-        ddlTestStatus: { value: data.status },
-        tblTestHistory: {
-          value: historyTable,
-        },
-      },
+      // record: {
+      //   ddlTestStatus: { value: data.status },
+      //   tblTestHistory: {
+      //     value: historyTable,
+      //   },
+      // },
+      record: recordData,
     });
     console.log('record: ----- ', record);
 
