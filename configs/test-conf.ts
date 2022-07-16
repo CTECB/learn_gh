@@ -64,7 +64,7 @@ export const getTestingAppId = async (plugin) => {
 export const getPluginInfo = async () => {
   const plugins = PLUGINS;
   for (const [key, value] of Object.entries(plugins)) {
-    if (value.testingAppId !== '') {
+    if (value.testingAppId === '') {
       value.testingAppId = await getTestingAppId(key);
     }
   }
