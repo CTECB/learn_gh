@@ -1,17 +1,14 @@
+import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 import { SystemPluginSettingPage } from '@pages/common/SystemPluginSetting';
 import { AppSettingPage } from '@pages/common/AppSetting';
 import { PluginConfigPage } from '@pages/multi-tab/PluginConfig';
 import { RecordAddPage } from '@pages/multi-tab/RecordAdd';
 import { RecordViewPage } from '@pages/multi-tab/RecordView';
 import { addFormField, moveField, removeFormField } from '@utils/kintoneAPIs/formUtil';
-import { credentials, plugins, testingSiteDomain } from '@configs/test-conf';
-import { KintoneRestAPIClient } from '@kintone/rest-api-client';
-
-// const appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
-// const recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
+import { getPluginInfo, TESTING_SITE_INFO } from '@configs/test-conf';
 
 describe('MultiTab - Display', async () => {
-  let pls, appSettingUrl, recordAddUrl;
+  let plugin, appSettingUrl, recordAddUrl;
 
   const addedField = {
     Added_Field_Text1:
@@ -30,22 +27,22 @@ describe('MultiTab - Display', async () => {
     }
   };
   const kintoneClient = new KintoneRestAPIClient({
-    baseUrl: testingSiteDomain,
-    auth: { username: credentials.username, password: credentials.password },
+    baseUrl: TESTING_SITE_INFO.baseUrl,
+    auth: TESTING_SITE_INFO.credentials,
   });
 
   before('Add plugin', async () => {
-    pls = await plugins();
-    console.log('this is plugin info: ---- ', pls);
-    appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
-    recordAddUrl = `k/${pls.multiTab.testingAppId}/edit`;
+    plugin = await getPluginInfo();
+    console.log('this is plugin info: ---- ', plugin);
+    appSettingUrl = `k/admin/app/${plugin.multiTab.testingAppId}/plugin/#/`;
+    recordAddUrl = `k/${plugin.multiTab.testingAppId}/edit`;
 
     await SystemPluginSettingPage.open(appSettingUrl);
-    await SystemPluginSettingPage.login(credentials);
+    await SystemPluginSettingPage.login(TESTING_SITE_INFO.credentials);
     if (await SystemPluginSettingPage.getNumberOfPlugins() > 0) {
       await SystemPluginSettingPage.removePlugin();
     }
-    await SystemPluginSettingPage.addPluginById(pls.multiTab.id);
+    await SystemPluginSettingPage.addPluginById(plugin.multiTab.id);
   });
 
   it('Display_001 - Verify multi-tab display correctly if the number of tabs greater than 1', async () => {
@@ -120,9 +117,9 @@ describe('MultiTab - Display', async () => {
 
     // Verify "Remember last selected tab" in case logout then login
     await RecordAddPage.open('/logout');
-    browser.pause(5000);
+    await browser.pause(5000);
     await RecordAddPage.open(recordAddUrl);
-    await RecordAddPage.login(credentials);
+    await RecordAddPage.login(TESTING_SITE_INFO.credentials);
 
     await RecordAddPage.verifyIsSelectedTab('blank_space_tab5');
     await RecordAddPage.verifyHTLMContent('RecordAddDisplay_003_Tab5.html');
@@ -136,7 +133,6 @@ describe('MultiTab - Display', async () => {
     await browser.url(detailScreenURL);
     await RecordAddPage.verifyIsSelectedTab('blank_space_tab5');
     await RecordAddPage.verifyHTLMContent('RecordViewDisplay_003_Tab5.html');
-    await RecordAddPage.clickCancelBtn();
   });
 
   it.skip('Display_004 - Verify multi-tab display correctly if there is multiple sections of multi-tab', async () => {
@@ -167,8 +163,8 @@ describe('MultiTab - Display', async () => {
   });
 
   it.skip('Display_005 - Verify multi-tab display correctly if there is new field added to any tab', async () => {
-    await addFormField(kintoneClient, pls.multiTab.testingAppId, addedField);
-    await moveField(kintoneClient, pls.multiTab.testingAppId, 5);
+    await addFormField(kintoneClient, plugin.multiTab.testingAppId, addedField);
+    await moveField(kintoneClient, plugin.multiTab.testingAppId, 5);
     await RecordAddPage.open(recordAddUrl);
     await RecordAddPage.clickTab('blank_space_tab1');
     await RecordAddPage.verifyHTLMContent('RecordAddDisplay_005.html');
@@ -177,7 +173,7 @@ describe('MultiTab - Display', async () => {
 
   it.skip('Display_006 - Verify multi-tab display correctly if there is a field removed out of to any tab', async () => {
     const removedFields = [Object.keys(addedField)[0]]; // --> field "Added_Field_Text1"
-    await removeFormField(kintoneClient, pls.multiTab.testingAppId, removedFields);
+    await removeFormField(kintoneClient, plugin.multiTab.testingAppId, removedFields);
     await RecordAddPage.open(recordAddUrl);
     await RecordAddPage.clickTab('blank_space_tab1');
     await RecordAddPage.verifyHTLMContent('RecordAddDisplay_006.html');
@@ -186,7 +182,7 @@ describe('MultiTab - Display', async () => {
 
   it.skip('Display_007 - Verify multi-tab display correctly if there is only 1 tab', async () => {
     await SystemPluginSettingPage.open(appSettingUrl);
-    await RecordAddPage.login(credentials);
+    await RecordAddPage.login(TESTING_SITE_INFO.credentials);
     await SystemPluginSettingPage.clickPluginSettingIcon();
     await PluginConfigPage.setEnableTabs(1, [1, 3, 4, 5], false);
     await PluginConfigPage.clickSubmit();

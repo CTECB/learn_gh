@@ -8,9 +8,3 @@ export const FIELD_CODES = {
   ddlRunResult: 'ddlRunResult',
   txtTestingAppUrl: 'ddlRunResult',
 };
-
-export const TEST_MANAGEMENT_APP = {
-  kintoneURL: process.env.TEST_MANAGEMENT_KINTONE_URL || '<url>',
-  appId: process.env.TEST_MANAGEMENT_APP_ID || '<id>',
-  apiToken: process.env.TEST_MANAGEMENT_APP_API_TOKEN || '<token>',
-};

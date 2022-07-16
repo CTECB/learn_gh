@@ -1,8 +1,9 @@
 import { KintoneRestAPIClient, KintoneRestAPIError } from '@kintone/rest-api-client';
-import { FIELD_CODES, TEST_MANAGEMENT_APP } from './config';
+import { FIELD_CODES } from './config';
+import { TEST_MANAGEMENT_APP } from '../../../configs/test-conf';
 
 const kintoneRestApiClient = new KintoneRestAPIClient({
-  baseUrl: TEST_MANAGEMENT_APP.kintoneURL,
+  baseUrl: TEST_MANAGEMENT_APP.baseUrl,
   auth: { apiToken: TEST_MANAGEMENT_APP.apiToken },
 });
 
@@ -11,7 +12,6 @@ export const updateTestManagementRecord = async (appId: string, data: any, selec
   const pluginRecord = (await kintoneRestApiClient.record.getRecords({ app: appId, query: queryByPlugin })).records[0];
 
   const historyTable: any = pluginRecord[FIELD_CODES.tblTestHistory].value;
-  console.log('history: ----- ', historyTable);
   if (action === 'add') {
     if (historyTable.length === 5) {
       historyTable.pop();
@@ -27,7 +27,6 @@ export const updateTestManagementRecord = async (appId: string, data: any, selec
         }
     };
     historyTable.unshift(newHistoryRow);
-    console.log('new history: ----- ', historyTable);
   }
 
   const recordData: any = {

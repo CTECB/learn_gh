@@ -8,8 +8,8 @@ inputs:
   githubToken:
     description: github token
     required: true
-  testManagementKintoneUrl:
-    description: test management Kintone Url
+  testManagementBaseUrl:
+    description: test management base url
     required: true
   testManagementAppId:
     description: test management app Id
@@ -50,7 +50,7 @@ runs:
         GITHUB_RUN_URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}
         WORKFLOW_RUN_NUMBER: ${{ github.run_number }}
         GITHUB_TOKEN: ${{ inputs.githubToken }}
-        TEST_MANAGEMENT_KINTONE_URL: ${{ inputs.testManagementKintoneUrl }}
+        TEST_MANAGEMENT_BASE_URL: ${{ inputs.testManagementBaseUrl }}
         TEST_MANAGEMENT_APP_ID: ${{ inputs.testManagementAppId }}
         TEST_MANAGEMENT_APP_API_TOKEN: ${{ inputs.testManagementAppApiToken }}
         KINTONE_PLUGIN: ${{ inputs.kintonePlugin }}

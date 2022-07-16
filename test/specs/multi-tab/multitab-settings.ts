@@ -1,18 +1,18 @@
 import { SystemPluginSettingPage } from '@pages/common/SystemPluginSetting';
 import { PluginConfigPage } from '@pages/multi-tab/PluginConfig';
 import { AppSettingPage } from '@pages/common/AppSetting';
-import { credentials, plugins } from '@configs/test-conf';
+import { getPluginInfo, TESTING_SITE_INFO } from '@configs/test-conf';
 
 describe('MultiTab - Settings', async () => {
-  let pls, appSettingUrl;
+  let plugin, appSettingUrl;
 
   before('Login', async () => {
-    pls = await plugins();
-    console.log('this is plugin info: ---- ', pls);
-    appSettingUrl = `k/admin/app/${pls.multiTab.testingAppId}/plugin/#/`;
+    plugin = await getPluginInfo();
+    console.log('this is plugin info: ---- ', plugin);
+    appSettingUrl = `k/admin/app/${plugin.multiTab.testingAppId}/plugin/#/`;
 
     await SystemPluginSettingPage.open(appSettingUrl);
-    await SystemPluginSettingPage.login(credentials);
+    await SystemPluginSettingPage.login(TESTING_SITE_INFO.credentials);
   });
 
   it('Setting_001: Verify plugin can be added into app successfully', async () => {
@@ -21,10 +21,10 @@ describe('MultiTab - Settings', async () => {
       await SystemPluginSettingPage.removePlugin();
     }
 
-    await SystemPluginSettingPage.addPluginById(pls.multiTab.id);
-    await SystemPluginSettingPage.verifyPluginDisplayed(pls.multiTab.name);
+    await SystemPluginSettingPage.addPluginById(plugin.multiTab.id);
+    await SystemPluginSettingPage.verifyPluginDisplayed(plugin.multiTab.name);
     await SystemPluginSettingPage.clickPluginSettingIcon();
-    await PluginConfigPage.verifyPluginVersion(pls.multiTab.version);
+    await PluginConfigPage.verifyPluginVersion(plugin.multiTab.version);
   });
 
   it('Setting_002: Verify plugin can be set successfully - section 1', async () => {

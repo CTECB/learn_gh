@@ -1,5 +1,5 @@
 import { updateTestManagementRecord } from '../test-management/src/test-result-handler';
-import { TEST_MANAGEMENT_APP } from '../test-management/src/config';
+import { TEST_MANAGEMENT_APP } from '@configs/test-conf';
 
 (async () => {
   const data = {

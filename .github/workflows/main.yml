@@ -22,7 +22,7 @@ on:
 #  - cron:  '0 * * * *'
 
 env:
-  TESTING_SITE_DOMAIN: ${{ secrets.TESTING_SITE_DOMAIN }}
+  TESTING_SITE_BASE_URL: ${{ secrets.TESTING_SITE_BASE_URL }}
   TESTING_SITE_USERNAME: ${{ secrets.TESTING_SITE_USERNAME }}
   TESTING_SITE_PASSWORD: ${{ secrets.TESTING_SITE_PASSWORD }}
   SPEC_RETRIES: 2
@@ -73,10 +73,10 @@ jobs:
         with:
           specRetries: ${{ needs.validate-inputs.outputs.specRetries }}
           kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
-          domain: ${{ secrets.TESTING_SITE_DOMAIN }}
-          loginName: ${{ secrets.TESTING_SITE_USERNAME }}
-          password: ${{ secrets.TESTING_SITE_PASSWORD }}
-          testManagementKintoneUrl: ${{ secrets.TEST_MANAGEMENT_KINTONE_URL }}
+          testingSiteBaseUrl: ${{ secrets.TESTING_SITE_BASE_URL }}
+          testingSiteUserName: ${{ secrets.TESTING_SITE_USERNAME }}
+          testingSitePassword: ${{ secrets.TESTING_SITE_PASSWORD }}
+          testManagementBaseUrl: ${{ secrets.TEST_MANAGEMENT_BASE_URL }}
           testManagementAppId: ${{ secrets.TEST_MANAGEMENT_APP_ID }}
           testManagementAppApiToken: ${{ secrets.TEST_MANAGEMENT_APP_API_TOKEN }}
 
@@ -105,7 +105,7 @@ jobs:
         with:
           kintonePlugin: ${{ needs.validate-inputs.outputs.kintonePlugin }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          testManagementKintoneUrl: ${{ secrets.TEST_MANAGEMENT_KINTONE_URL }}
+          testManagementBaseUrl: ${{ secrets.TEST_MANAGEMENT_BASE_URL }}
           testManagementAppId: ${{ secrets.TEST_MANAGEMENT_APP_ID }}
           testManagementAppApiToken: ${{ secrets.TEST_MANAGEMENT_APP_API_TOKEN }}
           testResult: ${{ needs.test.result }}

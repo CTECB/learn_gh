@@ -1,6 +1,6 @@
 import { desktopSuites } from '@configs/wdio/desktop-suites';
 import { getTestSpecs } from '@configs/wdio/getTestSpecs';
-import { testingSiteDomain } from '@configs/test-conf';
+import { TESTING_SITE_INFO } from '@configs/test-conf';
 
 const GRID = process.env.GRID || 'localhost:4444';
 const GRID_PATHS = GRID.split(':');
@@ -27,7 +27,7 @@ export const config: WebdriverIO.Config = {
 
   logLevel: 'info',
   bail: 0,
-  baseUrl: testingSiteDomain,
+  baseUrl: TESTING_SITE_INFO.baseUrl,
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,

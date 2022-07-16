@@ -11,17 +11,17 @@ inputs:
   specRetries:
     description: spec retries
     required: true
-  domain:
-    description: domain
+  testingSiteBaseUrl:
+    description: testing site base url
     required: true
-  loginName:
-    description: login name
+  testingSiteUserName:
+    description: testing site user name
     required: true
-  password:
-    description: password
+  testingSitePassword:
+    description: testing site password
     required: true
-  testManagementKintoneUrl:
-    description: test management Kintone Url
+  testManagementBaseUrl:
+    description: test management base url
     required: true
   testManagementAppId:
     description: test management app Id
@@ -60,13 +60,13 @@ runs:
       run: npm run test:ci -- --suite ${{ inputs.kintonePlugin }}
       shell: bash
       env:
-        DOMAIN: ${{ inputs.domain }}
-        LOGIN_NAME: ${{ inputs.loginName }}
-        PASSWORD: ${{ inputs.password }}
+        TESTING_SITE_BASE_URL: ${{ inputs.testingSiteBaseUrl }}
+        TESTING_SITE_USERNAME: ${{ inputs.testingSiteUserName }}
+        TESTING_SITE_PASSWORD: ${{ inputs.testingSitePassword }}
         SPEC_RETRIES: ${{ inputs.specRetries }}
         KINTONE_PLUGIN: ${{ inputs.kintonePlugin }}
         TEST_FILTER: ${{ inputs.testFilter }}
-        TEST_MANAGEMENT_KINTONE_URL: ${{ inputs.testManagementKintoneUrl }}
+        TEST_MANAGEMENT_BASE_URL: ${{ inputs.testManagementBaseUrl }}
         TEST_MANAGEMENT_APP_ID: ${{ inputs.testManagementAppId }}
         TEST_MANAGEMENT_APP_API_TOKEN: ${{ inputs.testManagementAppApiToken }}
     - name: Upload allure results

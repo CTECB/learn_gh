@@ -3,23 +3,22 @@ import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 import { Octokit } from '@octokit/core';
 import { triggerPluginTestWorkflow } from './github-handler';
 import { updateTestManagementRecord } from './test-result-handler';
-import { TEST_MANAGEMENT_APP } from './config';
-import { credentials, plugins, testingSiteDomain } from '../../../configs/test-conf';
+import { getPluginInfo, TEST_MANAGEMENT_APP, TESTING_SITE_INFO } from '../../../configs/test-conf';
 import { createAppFromJsonObject } from '../../kintoneAPIs/appUtil';
 import { getFormFieldsAndLayoutJsonObject } from '../../kintoneAPIs/recordUtil';
 
 const octokit = new Octokit({
-  auth: process.env.PAT || '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'
+  auth: process.env.PAT || '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'
 });
 
 const kintoneRestApiClient = new KintoneRestAPIClient({
-  baseUrl: TEST_MANAGEMENT_APP.kintoneURL,
+  baseUrl: TEST_MANAGEMENT_APP.baseUrl,
   auth: { apiToken: TEST_MANAGEMENT_APP.apiToken },
 });
 
 const testingAppAPIClient = new KintoneRestAPIClient({
-  baseUrl: testingSiteDomain,
-  auth: { username: credentials.username, password: credentials.password },
+  baseUrl: TESTING_SITE_INFO.baseUrl,
+  auth: TESTING_SITE_INFO.credentials,
 });
 
 kintone.events.on(['app.record.index.show'], async (event: any) => {
@@ -53,7 +52,7 @@ const handleTestExecutionAtDetailsScreen = async (octokit: Octokit, event: any) 
   runTestButton.addEventListener('click', async () => {
     const formFieldLayoutJsonObject = await getFormFieldsAndLayoutJsonObject(kintoneRestApiClient, event.appId, event.recordId);
     const createdApp = await createAppFromJsonObject(testingAppAPIClient, `[Plugin] ${selectedPlugin}`, 2, formFieldLayoutJsonObject.formFieldsJsonObject, formFieldLayoutJsonObject.formLayoutJsonObject);
-    const testingAppUrl = `${testingSiteDomain}/k/${createdApp.app}`;
+    const testingAppUrl = `${TESTING_SITE_INFO.baseUrl}/k/${createdApp.app}`;
 
     await _runTestFlow(octokit, selectedPlugin, runTestButton, false, testingAppUrl);
   });
@@ -114,7 +113,7 @@ const _openPluginRecordUrl = async (selectedPlugin: string) => {
   const queryByPlugin = `ddlPluginName in ("${selectedPlugin}")`;
   const pluginRecord = (await kintoneRestApiClient.record.getRecords({ app: TEST_MANAGEMENT_APP.appId, query: queryByPlugin })).records[0];
   const recordNumber = pluginRecord.Record_number.value;
-  const pluginRecordUrl = `${TEST_MANAGEMENT_APP.kintoneURL}/k/${TEST_MANAGEMENT_APP.appId}/show#record=${recordNumber}`;
+  const pluginRecordUrl = `${TEST_MANAGEMENT_APP.baseUrl}/k/${TEST_MANAGEMENT_APP.appId}/show#record=${recordNumber}`;
   await window.open(`${pluginRecordUrl}`, '_self');
 };
 
@@ -131,7 +130,7 @@ const _createRunTestButton = (recordEvent: any = undefined) => {
 };
 
 const _createPluginDropdownList = () => {
-  const pluginList = Object.keys(plugins);
+  const pluginList = Object.keys(getPluginInfo);
   const items = pluginList.map(value => {
     return { label: value, value: value };
   });
