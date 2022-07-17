@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Fri Jul 08 03:31:32 GMT 2022","Fri Jul 08 03:31:32 GMT 2022","7","","Multi-Tab - Display","","Multi-Tab - Display","""before all"" hook for Multi-Tab - Display","""before all"" hook for Multi-Tab - Display",""
-"broken","Fri Jul 08 03:31:32 GMT 2022","Fri Jul 08 03:31:32 GMT 2022","1","","Multi-Tab - Display","","Multi-Tab - Display","""after all"" hook for Multi-Tab - Display","""after all"" hook for Multi-Tab - Display",""
