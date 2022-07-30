@@ -2,10 +2,10 @@ import { Octokit } from '@octokit/core';
 
 export const triggerPluginTestWorkflow = async (octokit: Octokit, pluginName: string) => {
   await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
-    owner: 'CTECB',
-    repo: 'learn_gh',
+    owner: 'kintone-labs',
+    repo: 'kintone-plugin-tests',
     workflow_id: 'main.yml',
-    ref: 'master',
+    ref: 'update_report',
     inputs: {
       kintonePlugin: pluginName,
     }

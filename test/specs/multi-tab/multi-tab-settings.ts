@@ -8,7 +8,6 @@ describe('MultiTab - Settings', async () => {
 
   before('Login', async () => {
     plugin = await getPluginInfo();
-    console.log('this is plugin info: ---- ', plugin);
     appSettingUrl = `k/admin/app/${plugin.multiTab.testingAppId}/plugin/#/`;
 
     await SystemPluginSettingPage.open(appSettingUrl);

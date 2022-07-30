@@ -23,6 +23,7 @@ export const updateTestManagementRecord = async (appId: string, data: any, selec
           'ddlRunResult': { value: data.runResult },
           'txtWorkflowRunUrl': { value: data.workflowRunUrl },
           'txtAllureReportUrl': { value: data.allureReportUrl },
+          'rtxFailureStacktrace': { value: data.allureResultFailure },
           'executionTime': { value: data.executionTime },
         }
     };
@@ -30,9 +31,7 @@ export const updateTestManagementRecord = async (appId: string, data: any, selec
   }
 
   const recordData: any = {
-    tblTestHistory: {
-      value: historyTable,
-    },
+    tblTestHistory: { value: historyTable },
   };
   if (data.status !== undefined) {
     recordData.ddlTestStatus = { value: data.status };
@@ -40,20 +39,15 @@ export const updateTestManagementRecord = async (appId: string, data: any, selec
   if (data.testingAppUrl !== undefined) {
     recordData.txtTestingAppUrl = { value: data.testingAppUrl };
   }
+
   try {
     const record = await kintoneRestApiClient.record.updateRecord({
       app: appId,
       // @ts-ignore
       id: pluginRecord.$id.value,
-      // record: {
-      //   ddlTestStatus: { value: data.status },
-      //   tblTestHistory: {
-      //     value: historyTable,
-      //   },
-      // },
       record: recordData,
     });
-    console.log('record: ----- ', record);
+    console.log('[updateTestManagementRecord] data: ----- \n', record);
 
     return record;
   } catch (e) {

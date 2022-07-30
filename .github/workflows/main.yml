@@ -79,6 +79,12 @@ jobs:
           testManagementBaseUrl: ${{ secrets.TEST_MANAGEMENT_BASE_URL }}
           testManagementAppId: ${{ secrets.TEST_MANAGEMENT_APP_ID }}
           testManagementAppApiToken: ${{ secrets.TEST_MANAGEMENT_APP_API_TOKEN }}
+      - name: Get Allure result failure
+        id: allure_result_failure
+        if: always()
+        uses: ./.github/actions/allure-get-failure
+    outputs:
+      allureResultFailure: ${{ steps.allure_result_failure.outputs.allureResultFailure }}
 
   allure-report:
     runs-on: ubuntu-latest
@@ -110,3 +116,4 @@ jobs:
           testManagementAppApiToken: ${{ secrets.TEST_MANAGEMENT_APP_API_TOKEN }}
           testResult: ${{ needs.test.result }}
           startTime: ${{ needs.validate-inputs.outputs.startTime }}
+          allureResultFailure: ${{ needs.test.outputs.allureResultFailure }}

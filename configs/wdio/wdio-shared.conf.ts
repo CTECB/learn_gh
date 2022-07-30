@@ -29,7 +29,7 @@ export const config: WebdriverIO.Config = {
   bail: 0,
   baseUrl: TESTING_SITE_INFO.baseUrl,
   waitforTimeout: 10000,
-  connectionRetryTimeout: 120000,
+  connectionRetryTimeout: 150000,
   connectionRetryCount: 3,
 
   maxInstances: 1,
@@ -47,7 +47,7 @@ export const config: WebdriverIO.Config = {
   ],
   mochaOpts: {
     ui: 'bdd',
-    timeout: 180000,
+    timeout: 240000,
     extension: ['ts'],
     grep: process.env.TEST_FILTER,
   },

@@ -6,31 +6,32 @@ import fs from 'fs/promises';
 import path from 'path';
 
 const RECORD_BODY = '#record-gaia';
-const TAB_BTN = '//div[@class="tab-wrapped"]/button[text()="%s"]';
+const TAB_BTN = '(//div[@class="tab-wrapped"])[%d]/button[text()="%s"]';
 const CANCEL_BTN = '.gaia-ui-actionmenu-cancel';
 const SAVE_BTN = '.gaia-ui-actionmenu-save';
 const TAB1_TEXT1_FIELD = '//span[@class="control-label-text-gaia" and text()="[Tab1] Text1"]/../../div[contains(@class,"control-value-gaia")]/div/input';
 
+
 class RecordAdd extends BasePage {
-  public async clickTab(tabName: string) {
-    await $(sprintf(TAB_BTN, tabName)).click();
+  public async clickTab(section: number, tabName: string) {
+    await $(sprintf(TAB_BTN, section, tabName)).click();
     await browser.pause(4000);
-  };
+  }
 
   public async clickCancelBtn() {
     await $(CANCEL_BTN).click();
-  };
+  }
 
   public async clickSaveBtn() {
     await $(SAVE_BTN).click();
     await pageUtil.waitForPageReady(pageUtil.loadingSpinner(), false);
     await browser.pause(4000);
-  };
+  }
 
-  public async verifyIsSelectedTab(tabName: string) {
-    const selector = sprintf(TAB_BTN, tabName);
+  public async verifyIsSelectedTab(section: number, tabName: string) {
+    const selector = sprintf(TAB_BTN, section, tabName);
     await expect($(selector)).toHaveElementClass('submit');
-  };
+  }
 
   public async getRecordBodyHtml(regex: RegExp[], isSaveResult = true) {
     await pageUtil.waitForPageReady();
@@ -47,7 +48,7 @@ class RecordAdd extends BasePage {
     }
 
     return recordBody;
-  };
+  }
 
   public async verifyHTLMContent(expectedContentFileName: string) {
     const specificIdRegex = /for="\d+"|id="\d+"|(?<=id=")\S*(?=html5)|((?<==":)(?:\S+)(?="))/g;
@@ -60,11 +61,11 @@ class RecordAdd extends BasePage {
     const expectedFilePath = path.join(process.cwd(), '/resources/multi-tab/', expectedContentFileName);
     const expectedContent = await fileUtil.getFileContent(expectedFilePath, regex);
     expect(actualContent).toEqual(expectedContent);
-  };
+  }
 
   public async inputTab1Data() {
     await $(TAB1_TEXT1_FIELD).setValue('Tab1 Text1 Value');
-  };
+  }
 }
 
 export const RecordAddPage = new RecordAdd();

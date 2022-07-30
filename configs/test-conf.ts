@@ -4,8 +4,8 @@ export const isPreparation = process.env.IS_PREPARATION || false;
 
 export const TEST_MANAGEMENT_APP = {
   baseUrl: process.env.TEST_MANAGEMENT_BASE_URL || 'https://test-management-site.kintone.com',
-  appId: process.env.TEST_MANAGEMENT_APP_ID || 'appId',
-  apiToken: process.env.TEST_MANAGEMENT_APP_API_TOKEN || 'apiToken',
+  appId: process.env.TEST_MANAGEMENT_APP_ID || 'id',
+  apiToken: process.env.TEST_MANAGEMENT_APP_API_TOKEN || 'token',
 };
 
 export const TESTING_SITE_INFO = {
@@ -16,6 +16,8 @@ export const TESTING_SITE_INFO = {
   }
 };
 
+export const GIT_PAT = process.env.PAT || 'GIT_PAT';
+
 const PLUGINS = {
   multiTab: {
     name: 'Multi Tab Plugin',
@@ -25,8 +27,8 @@ const PLUGINS = {
   },
   conditionalDisplay: {
     name: 'Conditional Display Plugin',
-    id: '<id>',
-    version: '<version>',
+    id: 'mddmfapdkjkbfmcaekbkjjmlnakhilhb',
+    version: '1.11.0',
     testingAppId: '',
   },
 };
@@ -43,8 +45,8 @@ export const getTestingAppId = async (plugin) => {
 
     const queryByPlugin = `ddlPluginName in ("${plugin}")`;
     const pluginRecord = (await kintoneClient.record.getRecords({ app: TEST_MANAGEMENT_APP.appId, query: queryByPlugin })).records[0];
-    console.log('pluginRecord: ---- ', pluginRecord);
-    const recordNumber = pluginRecord['Record_number'].value;
+    const recordNumber = pluginRecord['$id'].value;
+    console.log('pluginRecord id: ---- ', recordNumber);
 
     const { record } = await kintoneClient.record.getRecord({
       app: TEST_MANAGEMENT_APP.appId,

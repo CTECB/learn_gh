@@ -2,13 +2,27 @@ import { updateTestManagementRecord } from '../test-management/src/test-result-h
 import { TEST_MANAGEMENT_APP } from '@configs/test-conf';
 
 (async () => {
+  let testResult: string = '';
+  switch (process.env.TEST_RESULT) {
+    case 'success':
+      testResult = '🟢 success';
+      break;
+    case 'failure':
+      testResult = '🔴 failure';
+      break;
+    case 'cancelled':
+      testResult = '🟡 cancelled';
+      break;
+  }
+
   const data = {
     workflowRunNumber: process.env.WORKFLOW_RUN_NUMBER,
-    status: process.env.TEST_RESULT,
-    runResult: process.env.TEST_RESULT,
+    status: testResult,
+    runResult: testResult,
     executionTime: process.env.EXECUTION_TIME,
     workflowRunUrl: process.env.GITHUB_RUN_URL,
     allureReportUrl: process.env.ALLURE_REPORT_URL,
+    allureResultFailure: process.env.ALLURE_RESULT_FAILURE
   };
   try {
     const selectedPlugin = process.env.KINTONE_PLUGIN;

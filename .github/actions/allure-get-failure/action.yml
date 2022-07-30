@@ -1,0 +1,8 @@
+name: 'get-allure-failure'
+description: 'Get Allure result failure'
+outputs:
+  allureResultFailure: # id of output
+    description: 'Allure result failure'
+runs:
+  using: 'node16'
+  main: 'index.js'

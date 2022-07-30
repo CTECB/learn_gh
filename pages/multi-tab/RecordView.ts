@@ -6,7 +6,7 @@ import path from 'path';
 import { sprintf } from 'sprintf-js';
 
 const RECORD_BODY = '#record-gaia';
-const TAB_BTN = '//div[@class="tab-wrapped"]/button[text()="%s"]';
+const TAB_BTN = '(//div[@class="tab-wrapped"])[%d]/button[text()="%s"]';
 
 class RecordView extends BasePage {
   public async getRecordBodyHtml(regex: RegExp[], isSaveResult = true) {
@@ -24,13 +24,13 @@ class RecordView extends BasePage {
     }
 
     return recordBody;
-  };
+  }
 
-  public verifyIsSelectedTab = async (tabName: string) => {
-    const selector = sprintf(TAB_BTN, tabName);
+  public async verifyIsSelectedTab(section: number, tabName: string) {
+    const selector = sprintf(TAB_BTN, section, tabName);
     await expect($(selector)).toHaveElementClass('submit');
-  };
-  
+  }
+
   public async verifyHTLMContent(expectedContentFileName: string) {
     const specificIdRegex = /for="\d+"|id="\d+"|(?<=id=")\S*(?=html5)/g;
     const generalDynamicStringRegex = /(\S+\d+.\d+.(:((\d+)|(\w+)).\w+)?)/g;
@@ -42,7 +42,7 @@ class RecordView extends BasePage {
     const expectedFilePath = path.join(process.cwd(), '/resources/multi-tab/', expectedContentFileName);
     const expectedContent = await fileUtil.getFileContent(expectedFilePath, regex);
     expect(actualContent).toEqual(expectedContent);
-  };
+  }
 }
 
 export const RecordViewPage = new RecordView();
